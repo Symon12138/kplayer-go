@@ -33,7 +33,7 @@ func TestNewHandlerServesIndex(t *testing.T) {
 		t.Fatalf("content-type = %q, want text/html", ct)
 	}
 	body := rec.Body.String()
-	if !strings.Contains(body, `app.js`) || !strings.Contains(body, `styles.css`) {
+	if !strings.Contains(body, `js/main.js`) || !strings.Contains(body, `styles.css`) {
 		t.Fatalf("index.html does not reference the assets: %q", body)
 	}
 }
@@ -58,7 +58,8 @@ func TestAssetsServedWithContentTypes(t *testing.T) {
 		path, wantCT string
 	}{
 		{MountPrefix + "/styles.css", "text/css; charset=utf-8"},
-		{MountPrefix + "/app.js", "text/javascript; charset=utf-8"},
+		{MountPrefix + "/js/main.js", "text/javascript; charset=utf-8"},
+		{MountPrefix + "/js/views/overview.js", "text/javascript; charset=utf-8"},
 	}
 	for _, c := range cases {
 		req := httptest.NewRequest(http.MethodGet, c.path, nil)
@@ -78,7 +79,7 @@ func TestUnknownAssetReturns404(t *testing.T) {
 	for _, p := range []string{
 		MountPrefix + "/nope.txt",
 		MountPrefix + "/static/nope.js",
-		MountPrefix + "/app.js/extra",
+		MountPrefix + "/js/main.js/extra",
 	} {
 		req := httptest.NewRequest(http.MethodGet, p, nil)
 		rec := httptest.NewRecorder()
