@@ -119,7 +119,7 @@ function openEdit(p, media, playlists) {
     '<div class="field mt"><label>添加条目：从媒体库选择，或直接输入路径（自动登记）</label>' +
     '<div class="cluster" style="gap:8px">' +
     '<select id="plPick" class="mono" style="flex:1;min-height:36px;background:var(--bg-0);color:var(--txt-0);border:1px solid var(--line-2);border-radius:8px;padding:6px 11px"></select>' +
-    '<input id="plItemPath" type="text" class="mono" placeholder="或输路径: /data/video/xx.mp4" spellcheck="false" style="flex:1.2">' +
+    '<input id="plItemPath" type="text" class="mono" placeholder="或输路径，例如 /data/video/xx.mp4" spellcheck="false" style="flex:1.2">' +
     '<button id="plAddItem" class="btn" type="button">+ 添加</button>' +
     '</div></div>' +
     '<div class="table-wrap mt"><table class="data"><thead><tr><th style="width:34px">#</th><th>条目</th><th>路径</th><th class="actions" style="text-align:right;width:120px">操作</th></tr></thead><tbody id="plItems"></tbody></table></div>' +

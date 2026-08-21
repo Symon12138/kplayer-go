@@ -158,18 +158,19 @@ function openDeliveries(w) {
     }
     const wrap = el('div', { class: 'table-wrap' });
     wrap.innerHTML = '<table class="data"><thead><tr>' +
-      '<th>事件</th><th>结果</th><th>尝试</th><th>错误</th><th>时间</th>' +
+      '<th>事件</th><th>结果</th><th>尝试次数</th><th>错误</th><th>时间</th>' +
       '</tr></thead><tbody></tbody></table>';
     const tbody = wrap.querySelector('tbody');
     list.forEach(function (d) {
+      const ok = d.status === 'success';
       const tr = el('tr', {});
       tr.appendChild(el('td', { text: d.event || '-' }));
-      tr.appendChild(el('td', {}, d.ok || d.success
+      tr.appendChild(el('td', {}, ok
         ? '<span class="badge badge-ok">成功</span>'
         : '<span class="badge badge-crit">失败</span>'));
       tr.appendChild(el('td', { text: String(d.attempts != null ? d.attempts : '-') }));
-      tr.appendChild(el('td', { class: 'cell-path' }, '<div class="path">' + esc(d.error || '-') + '</div>'));
-      tr.appendChild(el('td', { class: 'dim', text: fmtAgo(d.at || d.createdAt) }));
+      tr.appendChild(el('td', { class: 'cell-path' }, '<div class="path">' + esc(d.lastError || '-') + '</div>'));
+      tr.appendChild(el('td', { class: 'dim', text: fmtAgo(d.deliveredAt || d.createdAt) }));
       tbody.appendChild(tr);
     });
     host.appendChild(wrap);

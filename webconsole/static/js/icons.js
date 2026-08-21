@@ -15,6 +15,10 @@ const PATHS = {
   layers: '<path d="M8 2 14 5 8 8 2 5z"/><path d="M2 8.5 8 11.5 14 8.5"/><path d="M2 11.5 8 14.5 14 11.5"/>',
   camera: '<rect x="2" y="5" width="12" height="8" rx="1.5"/><path d="M5.5 5 7 3h2l1.5 2"/><circle cx="8" cy="9" r="2"/>',
   users: '<circle cx="6" cy="5.5" r="2.3"/><path d="M2 13c0-2.2 1.8-3.5 4-3.5s4 1.3 4 3.5"/><circle cx="11.5" cy="6" r="1.8"/><path d="M11 9.7c1.8.2 3 1.4 3 3.3"/>',
+  cache: '<rect x="2.5" y="3" width="11" height="3.4" rx="1"/><rect x="2.5" y="9.6" width="11" height="3.4" rx="1"/><path d="M5 4.7h.01M5 11.3h.01"/>',
+  server: '<rect x="2.5" y="2.5" width="11" height="4.6" rx="1.2"/><rect x="2.5" y="8.9" width="11" height="4.6" rx="1.2"/><path d="M5 4.8h.01M5 11.2h.01M12 4.8h.01M12 11.2h.01"/>',
+  template: '<rect x="2.5" y="2.5" width="11" height="11" rx="1.5"/><path d="M2.5 6h11M6.5 6v7.5"/>',
+  sparkle: '<path d="M8 2l1.4 3.6L13 7l-3.6 1.4L8 12 6.6 8.4 3 7l3.6-1.4z"/><path d="M12.5 10.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>',
 };
 
 export function icon(name) {

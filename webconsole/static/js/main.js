@@ -17,6 +17,10 @@ import * as snapshots from './views/snapshots.js';
 import * as ha from './views/ha.js';
 import * as analytics from './views/analytics.js';
 import * as scenes from './views/scenes.js';
+import * as caches from './views/caches.js';
+import * as nodes from './views/nodes.js';
+import * as templates from './views/templates.js';
+import * as intelligence from './views/intelligence.js';
 
 const REFRESH_MS = 5000;
 
@@ -42,13 +46,19 @@ const NAV = [
   },
   {
     group: '高级', items: [
+      { id: 'caches', title: '缓存任务', icon: 'cache', render: caches.render },
       { id: 'ha', title: '输出高可用', icon: 'route', render: ha.render },
-      { id: 'scenes', title: '场景模板', icon: 'layers', render: scenes.render },
+      { id: 'templates', title: '模板中心', icon: 'template', render: templates.render },
+      { id: 'intelligence', title: '智能编排', icon: 'sparkle', render: intelligence.render },
+      { id: 'nodes', title: '节点管理', icon: 'server', render: nodes.render },
       { id: 'snapshots', title: '配置快照', icon: 'camera', render: snapshots.render },
       { id: 'users', title: '用户与权限', icon: 'users', adminOnly: true, render: users.render }
     ]
   },
-  { group: '画面', items: [{ id: 'effects', title: '效果与插件', icon: 'wand', render: effects.render }] }
+  { group: '画面', items: [
+    { id: 'effects', title: '效果与插件', icon: 'wand', render: effects.render },
+    { id: 'scenes', title: '场景模板', icon: 'layers', render: scenes.render }
+  ] }
 ];
 
 const state = { current: 'overview', authed: false, currentUser: null };

@@ -58,6 +58,13 @@ var consoleNonAPIFragments = map[string]string{
 	"/password":       "tail of '/user/' + id + '/password' concatenation",
 	"/restore":        "tail of '/config-snapshot/' + id + '/restore' concatenation",
 	"/deliveries":     "tail of '/webhook/' + id + '/deliveries' concatenation",
+	"/failed":         "tails of '/cache-task/' + id + '/failed' and '/remote-command/' + id + '/failed' concatenations",
+	"/sent":           "tail of '/remote-command/' + id + '/sent' concatenation",
+	"/success":        "tail of '/remote-command/' + id + '/success' concatenation",
+	"/heartbeat":      "tail of '/node/' + id + '/heartbeat' concatenation",
+	"/generate-and-apply": "tail of '/smart-rule/' + id + '/generate-and-apply' concatenation",
+	"/approve":            "tail of '/suggestion/' + id + '/approve' concatenation",
+	"/reject":             "tail of '/suggestion/' + id + '/reject' concatenation",
 }
 
 func TestConsoleContract(t *testing.T) {

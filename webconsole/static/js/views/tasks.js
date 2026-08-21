@@ -7,11 +7,12 @@ export function render() {
   const root = el('div', { class: 'view-inner' });
   root.appendChild(loadingView());
 
-  Promise.all([get('/task/list'), get('/playlist/list')]).then(function (res) {
+  Promise.all([get('/task/list'), get('/playlist/list'), get('/scheduler')]).then(function (res) {
     setConn(true);
     const tasks = listOf(res[0], ['tasks', 'items', 'list']);
     const playlists = listOf(res[1], ['playlists', 'items', 'list']);
-    draw(root, tasks, playlists);
+    const sched = res[2] || {};
+    draw(root, tasks, playlists, !!sched.running);
   }).catch(function (err) {
     setConn(false);
     root.innerHTML = '';
@@ -21,16 +22,25 @@ export function render() {
   return root;
 }
 
-function draw(root, tasks, playlists) {
+function draw(root, tasks, playlists, schedRunning) {
   root.innerHTML = '';
   const plById = {};
   playlists.forEach(function (p) { plById[p.id] = p; });
 
   const newBtn = el('button', { class: 'btn btn-primary', type: 'button', text: '+ 新建任务' });
   newBtn.addEventListener('click', function () { openEdit(null, playlists); });
+  // 调度器开关：到点触发依赖调度器运行
+  const schedBtn = el('button', { class: 'btn btn-sm' + (schedRunning ? '' : ' btn-danger'), type: 'button' });
+  schedBtn.textContent = schedRunning ? '调度器：运行中（点击停止）' : '调度器：已停止（点击启动）';
+  schedBtn.title = '定时任务到点自动执行的前提是调度器在运行';
+  schedBtn.addEventListener('click', function () {
+    post('/scheduler/' + (schedRunning ? 'stop' : 'start'), {}).then(function () {
+      toast(schedRunning ? '调度器已停止 —— 定时任务不再触达' : '调度器已启动', 'ok'); render();
+    }).catch(function (e) { toast(e.message, 'err'); });
+  });
   root.appendChild(pageHead('定时任务',
     '到点自动执行：开播（播放节目单最新内容）或关播（停止推流）。适合每天定时开/关播的无人值守场景。',
-    [newBtn]));
+    [schedBtn, newBtn]));
 
   if (!tasks.length) {
     const act = el('button', { class: 'btn btn-primary', type: 'button', text: '新建第一个定时任务' });
