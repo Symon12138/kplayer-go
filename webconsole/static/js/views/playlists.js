@@ -66,9 +66,25 @@ function draw(root, playlists, media) {
     ops.appendChild(btnEdit);
     const btnDel = el('button', { class: 'btn btn-sm btn-danger', type: 'button', text: '删除' });
     btnDel.addEventListener('click', function () {
-      if (!window.confirm('确定删除节目单 "' + p.name + '" 吗？')) { return; }
-      del('/playlist/remove/' + encodeURIComponent(p.id)).then(function () {
-        toast('节目单已删除', 'ok'); render();
+      // P2 反向引用保护：查推流任务 / 定时任务 / 其他节目单的后备引用。
+      Promise.all([get('/stream/list'), get('/task/list')]).then(function (res) {
+        const refs = [];
+        listOf(res[0], ['streams', 'items', 'list']).forEach(function (s) {
+          if (s.playlistId === p.id) { refs.push('推流任务「' + (s.name || s.id) + '」'); }
+        });
+        listOf(res[1], ['tasks', 'items', 'list']).forEach(function (t) {
+          if ((t.playlistId || t.playlist_id) === p.id) { refs.push('定时任务「' + (t.name || t.id) + '」'); }
+        });
+        playlists.forEach(function (other) {
+          if (other.id !== p.id && other.fallbackPlaylistId === p.id) {
+            refs.push('节目单「' + (other.name || other.id) + '」的后备');
+          }
+        });
+        const warn = refs.length ? '\n\n⚠️ 以下地方正在引用它：\n' + refs.map(function (n) { return '  · ' + n; }).join('\n') + '\n删除后这些引用将失效！' : '';
+        if (!window.confirm('确定删除节目单 "' + p.name + '" 吗？' + warn)) { return; }
+        return del('/playlist/remove/' + encodeURIComponent(p.id)).then(function () {
+          toast('节目单已删除', 'ok'); render();
+        });
       }).catch(function (e) { toast(e.message, 'err'); });
     });
     ops.appendChild(btnDel);

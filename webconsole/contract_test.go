@@ -49,11 +49,15 @@ var consoleNonAPIFragments = map[string]string{
 	"/data/audio.mp3": "HTML input placeholder (media register dialog) for an external audio path, not an API call",
 	"/data/sub.srt":   "HTML input placeholder (media/effects dialogs) for a subtitle path, not an API call",
 	"/data/logo.png":  "HTML input placeholder (image watermark param) for a logo path, not an API call",
-	"/update":         "tail of '/media/' + id + '/update' concatenation",
+	"/update":         "tail of '/media/' + id + '/update' and '/playlist/' + id + '/update' concatenations",
 	"/run":            "tail of '/task/' + id + '/run' concatenation",
 	"/start":          "tail of '/stream/' + id + '/start' concatenation",
 	"/stop":           "tail of '/stream/' + id + '/stop' concatenation",
 	"/replace":        "tail of '/stream/' + id + '/replace' concatenation",
+	"/enabled":        "tail of '/user/' + id + '/enabled' concatenation",
+	"/password":       "tail of '/user/' + id + '/password' concatenation",
+	"/restore":        "tail of '/config-snapshot/' + id + '/restore' concatenation",
+	"/deliveries":     "tail of '/webhook/' + id + '/deliveries' concatenation",
 }
 
 func TestConsoleContract(t *testing.T) {

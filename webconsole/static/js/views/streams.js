@@ -34,6 +34,9 @@ export function render() {
     /* ---- 快速推流 ---- */
     root.appendChild(quickCard(playlists, gcfg));
 
+    /* ---- 引擎设置（全局 ffmpeg 配置） ---- */
+    root.appendChild(engineCard(gcfg));
+
     /* ---- 任务列表 ---- */
     const row = el('div', { class: 'row' },
       '<h2>任务列表（' + streams.length + '）</h2>');
@@ -190,16 +193,120 @@ function quickCard(playlists, gcfg) {
     const url = card.querySelector('.js-q-url').value.trim();
     if (!pid) { toast('请先选择节目单', 'err'); return; }
     if (!url || url.indexOf('rtmp://') !== 0) { toast('请填写有效的推流地址（rtmp://...）', 'err'); return; }
-    go.disabled = true; go.textContent = '推流启动中 ...';
-    post('/engine/ffmpeg', {
-      ffmpegPath: gcfg.ffmpegPath || undefined,
-      outputs: [{ url: url, width: 1280, height: 720, bitrateKbps: 2500, fps: 25, codec: 'libx264' }]
-    }).then(function () { return post('/player/play', { playlistId: pid }); })
-      .then(function () { toast('已开始推流', 'ok'); render(); })
-      .catch(function (e) { toast(e.message, 'err'); })
+    go.disabled = true; go.textContent = '检查配置 ...';
+    // P0 保护：快速推流会整体替换全局引擎输出。已有配置时先确认，
+    // 避免隐式覆盖用户手工维护的其他线路。
+    get('/engine/ffmpeg').then(function (cur) {
+      const existing = (objOf(cur, ['config', 'data']).outputs) || [];
+      if (existing.length > 0) {
+        const list = existing.map(function (o) { return '  · ' + (o.url || '(空)'); }).join('\n');
+        if (!window.confirm('快速推流将替换全局引擎的全部输出线路（现有 ' + existing.length + ' 条）：\n' + list +
+          '\n\n继续？\n（取消后可改用「新建推流任务」，任务线路互不影响）')) {
+          go.disabled = false; go.textContent = '开始推流';
+          return null;
+        }
+      }
+      go.textContent = '推流启动中 ...';
+      return post('/engine/ffmpeg', {
+        ffmpegPath: gcfg.ffmpegPath || undefined,
+        outputs: [{ url: url, width: 1280, height: 720, bitrateKbps: 2500, fps: 25, codec: 'libx264' }]
+      }).then(function () { return post('/player/play', { playlistId: pid }); })
+        .then(function () { toast('已开始推流', 'ok'); render(); });
+    }).catch(function (e) { toast(e.message, 'err'); })
       .finally(function () { go.disabled = false; go.textContent = '开始推流'; });
   });
   return card;
+}
+
+/* ---------- 引擎设置（全局 ffmpeg 配置） ---------- */
+function engineCard(gcfg) {
+  const details = el('details', { class: 'collapse section' },
+    '<summary>引擎设置 —— ffmpeg 路径 / 全局输出线路 / 硬件加速（影响直接播放与快速推流）</summary>');
+  const body = el('div', { class: 'collapse-body' });
+
+  body.appendChild(el('div', { class: 'form-grid two mt' },
+    '<div class="field"><label>ffmpeg 路径（留空 = 自动检测 PATH）</label>' +
+    '<input type="text" class="js-eng-ffmpeg mono" spellcheck="false" placeholder="ffmpeg" value="' + esc(gcfg.ffmpegPath || '') + '"></div>' +
+    '<div class="field"><label>&nbsp;</label><span class="muted" style="font-size:12px">修改后点「保存配置」；正在推流时需再点「应用到运行中」才生效。</span></div>'));
+
+  const outHost = el('div', { class: 'js-eng-outputs' });
+  function engOutRow(o) {
+    const row = el('div', { class: 'kp-engine-output' });
+    const head = el('div', { class: 'row', style: 'margin-bottom:8px' },
+      '<span class="muted">输出线路 ' + (outHost.children.length + 1) + '</span>' +
+      '<button type="button" class="btn btn-danger btn-sm js-rm">移除</button>');
+    head.querySelector('.js-rm').addEventListener('click', function () { row.remove(); });
+    row.appendChild(head);
+    row.appendChild(el('div', { class: 'field' },
+      '<label>推流地址 (RTMP)</label><input type="text" class="so-url mono" placeholder="rtmp://平台/live/流名" value="' + esc(o.url || '') + '">'));
+    row.appendChild(el('div', { class: 'form-grid three mt' },
+      '<div class="field"><label>宽度</label><input type="number" class="so-w" value="' + (o.width || 1280) + '"></div>' +
+      '<div class="field"><label>高度</label><input type="number" class="so-h" value="' + (o.height || 720) + '"></div>' +
+      '<div class="field"><label>码率 (kbps)</label><input type="number" class="so-b" value="' + (o.bitrateKbps || 2500) + '"></div>' +
+      '<div class="field"><label>帧率</label><input type="number" class="so-f" value="' + (o.fps || 25) + '"></div>' +
+      '<div class="field"><label>硬件加速 (-hwaccel)</label><select class="so-hw">' +
+      ['', 'auto', 'vaapi', 'nvenc', 'qsv', 'd3d11va', 'videotoolbox'].map(function (v) {
+        return '<option value="' + v + '"' + (o.hwAccel === v ? ' selected' : '') + '>' + (v === '' ? '不用' : v) + '</option>';
+      }).join('') + '</select></div>' +
+      '<div class="field"><label>声道数</label><input type="number" class="so-ac" min="1" value="' + (o.audioChannels || '') + '" placeholder="默认"></div>' +
+      '</div>'));
+    row.appendChild(el('div', { class: 'form-grid two mt' },
+      '<div class="field"><label>视频滤镜 (-vf，高级)</label><input type="text" class="so-flt mono" placeholder="留空=无" value="' + esc(o.filters || '') + '"></div>' +
+      '<div class="field"><label>音频滤镜 (-af，高级)</label><input type="text" class="so-af mono" placeholder="留空=无" value="' + esc(o.audioFilters || '') + '"></div>'));
+    return row;
+  }
+  const outputs = Array.isArray(gcfg.outputs) ? gcfg.outputs : [];
+  outputs.forEach(function (o) { outHost.appendChild(engOutRow(o)); });
+  if (!outputs.length) {
+    outHost.appendChild(el('p', { class: 'muted', style: 'font-size:12px;margin:4px 0' },
+      '还没有全局输出线路 —— 用「快速推流」或下面「+ 添加线路」配置。'));
+  }
+  body.appendChild(el('div', { class: 'field' },
+    '<label>全局输出线路</label>'));
+  body.appendChild(outHost);
+  const addBtn = el('button', { class: 'btn', type: 'button', text: '+ 添加线路' });
+  addBtn.addEventListener('click', function () { outHost.appendChild(engOutRow({ width: 1280, height: 720, bitrateKbps: 2500, fps: 25 })); });
+  body.appendChild(addBtn);
+
+  const actions = el('div', { class: 'form-actions' });
+  const save = el('button', { class: 'btn btn-primary', type: 'button', text: '保存配置' });
+  save.addEventListener('click', function () {
+    const outs = Array.from(outHost.querySelectorAll('.kp-engine-output')).map(function (row) {
+      const o = { url: row.querySelector('.so-url').value.trim() };
+      const num = function (cls) { const v = parseInt(row.querySelector(cls).value, 10); return isNaN(v) ? undefined : v; };
+      o.width = num('.so-w'); o.height = num('.so-h');
+      o.bitrateKbps = num('.so-b'); o.fps = num('.so-f');
+      o.audioChannels = num('.so-ac');
+      o.codec = 'libx264';
+      const hw = row.querySelector('.so-hw').value;
+      if (hw) { o.hwAccel = hw; }
+      const flt = row.querySelector('.so-flt');
+      if (flt && flt.value.trim()) { o.filters = flt.value.trim(); }
+      const af = row.querySelector('.so-af');
+      if (af && af.value.trim()) { o.audioFilters = af.value.trim(); }
+      return o;
+    }).filter(function (o) { return o.url; });
+    save.disabled = true; save.textContent = '保存中 ...';
+    post('/engine/ffmpeg', {
+      ffmpegPath: body.querySelector('.js-eng-ffmpeg').value.trim() || undefined,
+      outputs: outs
+    }).then(function () { toast('引擎配置已保存', 'ok'); render(); })
+      .catch(function (e) { toast(e.message, 'err'); })
+      .finally(function () { save.disabled = false; save.textContent = '保存配置'; });
+  });
+  actions.appendChild(save);
+
+  const apply = el('button', { class: 'btn', type: 'button', text: '应用到运行中推流' });
+  apply.addEventListener('click', function () {
+    if (!window.confirm('把已保存的引擎配置应用到正在运行的推流？（运行中的流会以新配置重启）')) { return; }
+    post('/engine/ffmpeg/apply', {}).then(function () { toast('已应用', 'ok'); render(); })
+      .catch(function (e) { toast(e.message, 'err'); });
+  });
+  actions.appendChild(apply);
+  body.appendChild(actions);
+
+  details.appendChild(body);
+  return details;
 }
 
 /* ---------- 任务表格 ---------- */

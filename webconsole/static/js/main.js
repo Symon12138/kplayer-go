@@ -9,10 +9,19 @@ import * as media from './views/media.js';
 import * as playlists from './views/playlists.js';
 import * as tasks from './views/tasks.js';
 import * as effects from './views/effects.js';
+import * as alarms from './views/alarms.js';
+import * as webhooks from './views/webhooks.js';
+import * as audit from './views/audit.js';
+import * as users from './views/users.js';
+import * as snapshots from './views/snapshots.js';
+import * as ha from './views/ha.js';
+import * as analytics from './views/analytics.js';
+import * as scenes from './views/scenes.js';
 
 const REFRESH_MS = 5000;
 
-/* 导航定义：分组 → 页面。auto = 活动页每 5 秒自动刷新。 */
+/* 导航定义：分组 → 页面。auto = 活动页每 5 秒自动刷新。
+ * adminOnly 的页面仅对 admin 角色显示（后端权限矩阵兜底）。 */
 const NAV = [
   { group: '监控', items: [{ id: 'overview', title: '总览', icon: 'gauge', auto: true, render: overview.render }] },
   { group: '播出', items: [{ id: 'streams', title: '推流任务', icon: 'broadcast', auto: true, render: streams.render }] },
@@ -21,6 +30,22 @@ const NAV = [
       { id: 'media', title: '媒体库', icon: 'film', render: media.render },
       { id: 'playlist', title: '节目单', icon: 'list', render: playlists.render },
       { id: 'tasks', title: '定时任务', icon: 'clock', render: tasks.render }
+    ]
+  },
+  {
+    group: '运营', items: [
+      { id: 'alarms', title: '告警', icon: 'bell', auto: true, render: alarms.render },
+      { id: 'webhooks', title: 'Webhook', icon: 'hook', render: webhooks.render },
+      { id: 'audit', title: '审计日志', icon: 'shield', render: audit.render },
+      { id: 'analytics', title: '数据统计', icon: 'chart', render: analytics.render }
+    ]
+  },
+  {
+    group: '高级', items: [
+      { id: 'ha', title: '输出高可用', icon: 'route', render: ha.render },
+      { id: 'scenes', title: '场景模板', icon: 'layers', render: scenes.render },
+      { id: 'snapshots', title: '配置快照', icon: 'camera', render: snapshots.render },
+      { id: 'users', title: '用户与权限', icon: 'users', adminOnly: true, render: users.render }
     ]
   },
   { group: '画面', items: [{ id: 'effects', title: '效果与插件', icon: 'wand', render: effects.render }] }
@@ -79,12 +104,18 @@ function currentView() {
 
 function render() {
   if (!state.authed) { return; }
-  const v = currentView();
+  let v = currentView();
+  const map = viewsMap();
+  // adminOnly 页面仅 admin 可见；其他角色回退到总览（导航项同样隐藏）。
+  if (map[v] && map[v].adminOnly &&
+      !(state.currentUser && state.currentUser.role === 'admin')) {
+    v = 'overview';
+  }
   state.current = v;
   $$('.nav-item[data-view]').forEach(function (b) {
     b.classList.toggle('is-active', b.dataset.view === v);
   });
-  const view = viewsMap()[v];
+  const view = map[v];
   $('#pageTitle').textContent = view.title;
   document.title = view.title + ' - KPlayer 播控台';
   closeSidebar();
@@ -103,10 +134,13 @@ function closeSidebar() {
 function buildNav() {
   const nav = $('#nav');
   nav.innerHTML = '';
+  const isAdmin = state.currentUser && state.currentUser.role === 'admin';
   NAV.forEach(function (g) {
+    const items = g.items.filter(function (v) { return !v.adminOnly || isAdmin; });
+    if (!items.length) { return; }
     const group = el('div', { class: 'nav-group' });
     group.appendChild(el('div', { class: 'nav-label', text: g.group }));
-    g.items.forEach(function (v) {
+    items.forEach(function (v) {
       const b = el('button', { class: 'nav-item', type: 'button', 'data-view': v.id, 'data-title': v.title });
       b.innerHTML = icon(v.icon) + '<span>' + esc(v.title) + '</span>';
       b.addEventListener('click', function () { location.hash = v.id; });
@@ -143,12 +177,12 @@ function startPolling() {
 function enterApp() {
   state.authed = true;
   $('#login').hidden = true;
+  buildNav(); // 角色决定导航可见性（登录/会话切换后重建）
   render();
   startPolling();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  buildNav();
   bindChrome();
   bindLogin();
   /* 401 → 弹登录页（鉴权模式下的会话失效路径） */

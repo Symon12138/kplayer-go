@@ -7,6 +7,14 @@ const PATHS = {
   list: '<path d="M5.5 4h8M5.5 8h8M5.5 12h8"/><circle cx="3" cy="4" r=".9"/><circle cx="3" cy="8" r=".9"/><circle cx="3" cy="12" r=".9"/>',
   clock: '<circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.6"/>',
   wand: '<path d="M3 13 10 6"/><path d="M11.5 2.5 12 4l1.5.5L12 5l-.5 1.5L11 5 9.5 4.5 11 4z"/><path d="M5.5 2v2M2 5.5h2"/>',
+  bell: '<path d="M12 11H4c1-1 1.5-2 1.5-4.5a2.5 2.5 0 0 1 5 0C10.5 9 11 10 12 11z"/><path d="M6.8 13a1.3 1.3 0 0 0 2.4 0"/>',
+  hook: '<path d="M8 2v7a3 3 0 1 0 3 3"/><path d="M6 2h4"/>',
+  shield: '<path d="M8 2l5 2v4c0 3-2 5-5 6-3-1-5-3-5-6V4z"/><path d="M5.8 8l1.6 1.6L10.5 6.5"/>',
+  chart: '<path d="M2 14h12"/><path d="M4 14V8M8 14V4M12 14V6"/>',
+  route: '<circle cx="4" cy="4" r="1.8"/><circle cx="12" cy="12" r="1.8"/><path d="M4 6v3a3 3 0 0 0 3 3h3.2"/>',
+  layers: '<path d="M8 2 14 5 8 8 2 5z"/><path d="M2 8.5 8 11.5 14 8.5"/><path d="M2 11.5 8 14.5 14 11.5"/>',
+  camera: '<rect x="2" y="5" width="12" height="8" rx="1.5"/><path d="M5.5 5 7 3h2l1.5 2"/><circle cx="8" cy="9" r="2"/>',
+  users: '<circle cx="6" cy="5.5" r="2.3"/><path d="M2 13c0-2.2 1.8-3.5 4-3.5s4 1.3 4 3.5"/><circle cx="11.5" cy="6" r="1.8"/><path d="M11 9.7c1.8.2 3 1.4 3 3.3"/>',
 };
 
 export function icon(name) {

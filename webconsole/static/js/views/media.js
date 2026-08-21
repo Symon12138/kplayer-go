@@ -1,7 +1,6 @@
 /* views/media.js — 媒体库：推流内容源的登记、扫描与管理。 */
 
-import { get, post, del, listOf } from '../api.js';
-import { el, esc, toast, setConn, loadingView, errorView, emptyView, modal, pageHead, fmtBytes, fmtDur, fmtAgo } from '../ui.js';
+import { get, post, del, listOf } from '../api.js';import { el, esc, toast, setConn, loadingView, errorView, emptyView, modal, pageHead, fmtBytes, fmtDur, fmtAgo } from '../ui.js';
 
 export function render() {
   const root = el('div', { class: 'view-inner' });
@@ -105,9 +104,23 @@ function redrawTable(root, rows, all) {
     opsRow.appendChild(btnEdit);
     const btnDel = el('button', { class: 'btn btn-sm btn-danger', type: 'button', text: '移除' });
     btnDel.addEventListener('click', function () {
-      if (!window.confirm('移除媒体 "' + (m.name || m.path) + '"？（不影响磁盘文件；引用它的节目单条目将失效）')) { return; }
-      del('/media/remove/' + encodeURIComponent(m.id)).then(function () {
-        toast('媒体已移除', 'ok'); render();
+      // P2 反向引用保护：先查节目单引用，再确认。
+      get('/playlist/list').then(function (res) {
+        const refs = [];
+        listOf(res, ['playlists', 'items', 'list']).forEach(function (p) {
+          if ((p.items || []).some(function (it) { return (it.mediaId || it.media_id) === m.id; })) {
+            refs.push(p.name || p.id);
+          }
+        });
+        const warn = refs.length
+          ? '\n\n⚠️ 以下节目单正在引用它：\n' + refs.map(function (n) { return '  · ' + n; }).join('\n') + '\n移除后这些条目将失效！'
+          : '';
+        if (!window.confirm('移除媒体 "' + (m.name || m.path) + '"？（不影响磁盘文件）' + warn)) {
+          return null;
+        }
+        return del('/media/remove/' + encodeURIComponent(m.id)).then(function () {
+          toast('媒体已移除', 'ok'); render();
+        });
       }).catch(function (e) { toast(e.message, 'err'); });
     });
     opsRow.appendChild(btnDel);
