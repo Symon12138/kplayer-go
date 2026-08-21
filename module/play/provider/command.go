@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 
 	"github.com/bytelang/kplayer/module"
@@ -249,8 +248,13 @@ func stopCommand() *cobra.Command {
 				return nil
 			}
 
-			// kill process
-			if err := syscall.Kill(pid, syscall.SIGKILL); err != nil {
+			// kill process（跨平台：POSIX 发 SIGKILL，Windows 走 TerminateProcess）
+			proc, err := os.FindProcess(pid)
+			if err != nil {
+				log.WithField("error", err).Error("find process failed")
+				return nil
+			}
+			if err := killProcess(proc); err != nil {
 				log.WithField("error", err).Error("kill process failed")
 				return err
 			}
@@ -485,7 +489,7 @@ func getPID() (int, error) {
 	if err != nil {
 		return 0, fmt.Errorf("kplayer not running on daemon mode")
 	}
-	if err := process.Signal(syscall.Signal(0)); err != nil {
+	if !processAlive(process) {
 		return 0, fmt.Errorf("kplayer not running on daemon mode")
 	}
 

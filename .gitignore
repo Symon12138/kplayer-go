@@ -10,6 +10,7 @@ core/cache
 # ---- Go 构建与缓存 ----
 *.exe
 *.so
+*.dll
 kplayer
 .gocache/
 
