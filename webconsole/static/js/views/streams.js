@@ -382,7 +382,9 @@ export function openStreamEdit(s, playlists, gcfg) {
     '<div class="field"><label>断线自动重推间隔（秒，0 = 关闭）</label><input id="stReconnect" type="number" min="0" value="' + (editing ? (s.reconnectInterval || 5) : 5) + '"></div>' +
     '</div>' +
     '<div class="field mt"><label>内容（节目单：文件或目录按顺序连续播放）</label><select id="stPlaylist" class="mono"></select></div>' +
-    '<div class="field mt"><label>输出线路（一个任务可同时推多条线路）</label><div id="stOutputs"></div>' +
+    '<div class="field mt"><label>任务级 ffmpeg 路径（可选，留空自动检测；不同任务可用不同 ffmpeg）</label>' +
+    '<input id="stFfmpeg" type="text" class="mono" spellcheck="false" placeholder="留空自动检测" value="' + esc(editing ? (s.ffmpegPath || '') : '') + '"></div>' +
+    '<div class="field mt"><label>输出线路（一个任务可同时推多条线路，每条独立参数）</label><div id="stOutputs"></div>' +
     '<button id="stAddOut" class="btn" type="button">+ 添加线路</button></div>' +
     '<p class="muted" style="font-size:12px;margin:6px 0 0">线路预填常用参数（1280x720 / 2500kbps / 25fps / H.264），只需填写推流地址。</p>' +
     '<div class="form-actions"><button id="stCancel" class="btn" type="button">取消</button>' +
@@ -409,10 +411,22 @@ export function openStreamEdit(s, playlists, gcfg) {
       '<div class="field"><label>码率 (kbps)</label><input type="number" class="so-b" value="' + (o.bitrateKbps || 2500) + '"></div>' +
       '<div class="field"><label>帧率</label><input type="number" class="so-f" value="' + (o.fps || 25) + '"></div>' +
       '<div class="field"><label>声道数</label><input type="number" class="so-ac" min="1" value="' + (o.audioChannels || '') + '" placeholder="默认"></div>' +
-      '<div class="field"><label>采样率</label><input type="number" class="so-ar" min="1" value="' + (o.audioSampleRate || '') + '" placeholder="默认"></div>'));
-    row.appendChild(el('div', { class: 'field mt' },
-      '<label>滤镜（高级，ffmpeg -vf 语法；如 drawtext 文字水印、subtitles 字幕烧录）</label>' +
-      '<input type="text" class="so-flt mono" placeholder="留空=无" value="' + esc(o.filters || '') + '">'));
+      '<div class="field"><label>采样率</label><input type="number" class="so-ar" min="1" value="' + (o.audioSampleRate || '') + '" placeholder="默认"></div>' +
+      '<div class="field"><label>编码器</label><select class="so-codec">' +
+      ['libx264|H.264 (libx264，默认)', 'libx265|H.265 (libx265)', 'h264_nvenc|H.264 NVENC (N卡)', 'h264_qsv|H.264 QSV (Intel)', 'h264_amf|H.264 AMF (A卡)'].map(function (x) {
+        var kv = x.split('|'); return '<option value="' + kv[0] + '"' + ((o.codec || 'libx264') === kv[0] ? ' selected' : '') + '>' + kv[1] + '</option>';
+      }).join('') + '</select></div>' +
+      '<div class="field"><label>硬件加速 (-hwaccel)</label><select class="so-hw">' +
+      ['', 'auto', 'vaapi', 'nvenc', 'qsv', 'd3d11va', 'videotoolbox'].map(function (v) {
+        return '<option value="' + v + '"' + (o.hwAccel === v ? ' selected' : '') + '>' + (v === '' ? '不用' : v) + '</option>';
+      }).join('') + '</select></div>' +
+      '</div>' +
+      '<div class="form-grid two mt">' +
+      '<div class="field"><label>视频滤镜 (-vf，高级；如 drawtext 水印、subtitles 字幕)</label>' +
+      '<input type="text" class="so-flt mono" placeholder="留空=无" value="' + esc(o.filters || '') + '"></div>' +
+      '<div class="field"><label>音频滤镜 (-af，高级；如 volume=0.5)</label>' +
+      '<input type="text" class="so-af mono" placeholder="留空=无" value="' + esc(o.audioFilters || '') + '"></div>' +
+      '</div>'));
     return row;
   }
   const defaultLine = { url: '', width: 1280, height: 720, bitrateKbps: 2500, fps: 25, codec: 'libx264' };
@@ -438,15 +452,21 @@ export function openStreamEdit(s, playlists, gcfg) {
       if (!isNaN(f)) { out.fps = f; }
       if (!isNaN(ac) && ac > 0) { out.audioChannels = ac; }
       if (!isNaN(ar) && ar > 0) { out.audioSampleRate = ar; }
-      out.codec = 'libx264';
+      out.codec = row.querySelector('.so-codec').value || 'libx264';
+      const hw = row.querySelector('.so-hw').value;
+      if (hw) { out.hwAccel = hw; }
       const flt = row.querySelector('.so-flt');
       if (flt && flt.value.trim()) { out.filters = flt.value.trim(); }
+      const af = row.querySelector('.so-af');
+      if (af && af.value.trim()) { out.audioFilters = af.value.trim(); }
       return out;
     }).filter(function (o) { return o.url; });
     if (!name) { toast('请输入任务名称', 'err'); return; }
     if (!playlistId) { toast('请选择节目单', 'err'); return; }
     if (!outs.length) { toast('请至少添加一个输出地址', 'err'); return; }
+    const ffmpegPath = m.querySelector('#stFfmpeg').value.trim();
     const body = { name: name, playlistId: playlistId, outputs: outs };
+    if (ffmpegPath) { body.ffmpegPath = ffmpegPath; }
     const ri = parseInt(m.querySelector('#stReconnect').value, 10);
     if (!isNaN(ri) && ri >= 0) { body.reconnectInterval = ri; }
     const p = editing
