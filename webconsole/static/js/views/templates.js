@@ -202,7 +202,7 @@ function openIndEdit(t) {
     '</div>' +
     '<div class="field mt"><label>说明</label><input id="itDesc" type="text" value="' + esc(editing ? (t.description || '') : '') + '"></div>' +
     '<div class="field mt"><label>素材占位（每行一个，部署时逐个填实际路径）</label>' +
-    '<textarea id="itPh" class="mono" spellcheck="false" style="min-height:70px" placeholder="{{main_video}}&#10;{{logo}}">' +
+    '<textarea id="itPh" class="mono" spellcheck="false" style="min-height:70px" placeholder="${main_video}&#10;${logo}">' +
     esc(editing ? (t.mediaPlaceholders || []).join('\n') : '') + '</textarea></div>' +
     '<div class="field mt"><label>场景类型（每行一个 kind，可选）</label>' +
     '<textarea id="itKinds" class="mono" spellcheck="false" style="min-height:52px">' +
@@ -254,7 +254,7 @@ function openDeploy(t) {
   } else {
     body = el('div', { class: 'modal' },
       '<h3>部署 — ' + esc(t.name) + '</h3>' +
-      '<p class="muted" style="margin:-6px 0 10px;font-size:12px">为每个素材占位填实际绝对路径：</p>' +
+      '<p class="muted" style="margin:-6px 0 10px;font-size:12px">为每个素材占位填对应的媒体库 ID（在媒体库页可查）：</p>' +
       '<div class="js-ph"></div>' +
       '<div class="form-actions"><button class="btn js-cancel" type="button">取消</button>' +
       '<button class="btn btn-primary js-go" type="button">立即部署</button></div>');

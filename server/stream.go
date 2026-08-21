@@ -72,17 +72,21 @@ type StreamManager struct {
 	// resolveMedia maps a media library id to its media entry (a file or a
 	// directory).
 	resolveMedia func(ctx context.Context, mediaID string) (*management.Media, error)
+	// resolvePlaylist maps a playlist id to its media entries in the
+	// playlist's play order.
+	resolvePlaylist func(ctx context.Context, playlistID string) ([]*management.Media, error)
 }
 
 // NewStreamManager loads the persisted tasks (if any) and returns the
 // manager. A missing or corrupt file starts with an empty task list.
-func NewStreamManager(file string, resolveMedia func(ctx context.Context, mediaID string) (*management.Media, error)) *StreamManager {
+func NewStreamManager(file string, resolveMedia func(ctx context.Context, mediaID string) (*management.Media, error), resolvePlaylist func(ctx context.Context, playlistID string) ([]*management.Media, error)) *StreamManager {
 	m := &StreamManager{
-		file:         file,
-		tasks:        map[string]*StreamTask{},
-		engs:         map[string]*engine.FFmpegEngine{},
-		resolveMedia: resolveMedia,
-		mediaSvc:     management.NewMediaService(nil),
+		file:            file,
+		tasks:           map[string]*StreamTask{},
+		engs:            map[string]*engine.FFmpegEngine{},
+		resolveMedia:    resolveMedia,
+		resolvePlaylist: resolvePlaylist,
+		mediaSvc:        management.NewMediaService(nil),
 	}
 	if raw, err := os.ReadFile(file); err == nil {
 		var data struct {
@@ -284,24 +288,47 @@ func (m *StreamManager) taskEngine(t *StreamTask) *engine.FFmpegEngine {
 	return e
 }
 
-// Start begins the task's stream: resolves the media entry (a single file
-// or a directory expanded into its sorted video queue) and starts the
+// Start begins the task's stream: resolves the content source (a playlist
+// expands to its media entries in play order; a single media entry may be a
+// file or a directory expanded into its sorted video queue) and starts the
 // task's own ffmpeg process with the task's outputs.
 func (m *StreamManager) Start(ctx context.Context, id string) error {
 	t, err := m.Get(id)
 	if err != nil {
 		return err
 	}
-	if m.resolveMedia == nil {
-		return fmt.Errorf("stream %q: media resolver unavailable", id)
+	var medias []*management.Media
+	switch {
+	case t.PlaylistID != "":
+		if m.resolvePlaylist == nil {
+			return fmt.Errorf("stream %q: playlist resolver unavailable", id)
+		}
+		medias, err = m.resolvePlaylist(ctx, t.PlaylistID)
+		if err != nil {
+			return fmt.Errorf("stream %q: resolve playlist: %w", id, err)
+		}
+		if len(medias) == 0 {
+			return fmt.Errorf("stream %q: playlist %q has no items", id, t.PlaylistID)
+		}
+	case t.MediaID != "":
+		if m.resolveMedia == nil {
+			return fmt.Errorf("stream %q: media resolver unavailable", id)
+		}
+		media, err := m.resolveMedia(ctx, t.MediaID)
+		if err != nil {
+			return fmt.Errorf("stream %q: resolve media: %w", id, err)
+		}
+		medias = []*management.Media{media}
+	default:
+		return fmt.Errorf("stream %q: task has no content source", id)
 	}
-	media, err := m.resolveMedia(ctx, t.MediaID)
-	if err != nil {
-		return fmt.Errorf("stream %q: resolve media: %w", id, err)
-	}
-	items, err := m.expandMedia(ctx, media)
-	if err != nil {
-		return fmt.Errorf("stream %q: expand media: %w", id, err)
+	items := make([]engine.PlayItem, 0, len(medias))
+	for _, media := range medias {
+		part, err := m.expandMedia(ctx, media)
+		if err != nil {
+			return fmt.Errorf("stream %q: expand media: %w", id, err)
+		}
+		items = append(items, part...)
 	}
 	eng := m.taskEngine(t)
 	// StartQueue 单元素与 Start 等价，但会携带媒体的外挂音频/字幕。
@@ -383,6 +410,20 @@ func (m *StreamManager) Views() []StreamView {
 	return out
 }
 
+// streamContent merges the mutually exclusive mediaId/playlistId request
+// fields into the StreamManager content reference ("pl:" marks a playlist).
+func streamContent(mediaID, playlistID string) (string, error) {
+	switch {
+	case mediaID != "" && playlistID != "":
+		return "", fmt.Errorf("stream: mediaId and playlistId are mutually exclusive")
+	case playlistID != "":
+		return "pl:" + playlistID, nil
+	case mediaID != "":
+		return mediaID, nil
+	default:
+		return "", fmt.Errorf("stream: content source required (mediaId or playlistId)")
+	}
+}
 // handleStream serves the /stream REST endpoints for multi-stream tasks.
 func (h *managementHandler) handleStream(w http.ResponseWriter, r *http.Request) {
 	if h.streams == nil {
@@ -400,6 +441,7 @@ func (h *managementHandler) handleStream(w http.ResponseWriter, r *http.Request)
 		var req struct {
 			Name              string                `json:"name"`
 			MediaID           string                `json:"mediaId"`
+			PlaylistID        string                `json:"playlistId"`
 			FFmpegPath        string                `json:"ffmpegPath,omitempty"`
 			ReconnectInterval int                   `json:"reconnectInterval,omitempty"`
 			Outputs           []engine.OutputConfig `json:"outputs"`
@@ -407,13 +449,19 @@ func (h *managementHandler) handleStream(w http.ResponseWriter, r *http.Request)
 		if !h.decode(w, r, &req) {
 			return
 		}
-		item, err := h.streams.Create(req.Name, req.MediaID, req.FFmpegPath, req.ReconnectInterval, req.Outputs)
+		content, cerr := streamContent(req.MediaID, req.PlaylistID)
+		if cerr != nil {
+			h.writeError(w, http.StatusBadRequest, cerr.Error())
+			return
+		}
+		item, err := h.streams.Create(req.Name, content, req.FFmpegPath, req.ReconnectInterval, req.Outputs)
 		h.respondResult(w, item, err)
 	case r.Method == http.MethodPost && id != "" && action == "replace":
 		var req struct {
 			ID                string                `json:"id"`
 			Name              string                `json:"name"`
 			MediaID           string                `json:"mediaId"`
+			PlaylistID        string                `json:"playlistId"`
 			FFmpegPath        string                `json:"ffmpegPath,omitempty"`
 			ReconnectInterval int                   `json:"reconnectInterval,omitempty"`
 			Outputs           []engine.OutputConfig `json:"outputs"`
@@ -424,7 +472,12 @@ func (h *managementHandler) handleStream(w http.ResponseWriter, r *http.Request)
 		if req.ID == "" {
 			req.ID = routeTarget(id, action, "replace")
 		}
-		item, err := h.streams.Update(req.ID, req.Name, req.MediaID, req.FFmpegPath, req.ReconnectInterval, req.Outputs)
+		content, cerr := streamContent(req.MediaID, req.PlaylistID)
+		if cerr != nil {
+			h.writeError(w, http.StatusBadRequest, cerr.Error())
+			return
+		}
+		item, err := h.streams.Update(req.ID, req.Name, content, req.FFmpegPath, req.ReconnectInterval, req.Outputs)
 		h.respondResult(w, item, err)
 	case r.Method == http.MethodPost && id != "" && action == "start":
 		err := h.streams.Start(r.Context(), routeTarget(id, action, "start"))

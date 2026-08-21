@@ -143,6 +143,20 @@ func newManagementHandlerWithEngine(play playprovider.ProviderI, resource resour
 	}
 	result.streams = NewStreamManager(streamFile, func(ctx context.Context, mediaID string) (*management.Media, error) {
 		return result.media.Get(mediaID)
+	}, func(ctx context.Context, playlistID string) ([]*management.Media, error) {
+		pl, err := result.playlists.Get(playlistID)
+		if err != nil {
+			return nil, err
+		}
+		out := make([]*management.Media, 0, len(pl.Items))
+		for _, it := range pl.Items {
+			m, err := result.media.Get(it.MediaID)
+			if err != nil {
+				return nil, err
+			}
+			out = append(out, m)
+		}
+		return out, nil
 	})
 	result.effects = NewEffectManager(effectFile)
 	result.status = &providerStatus{play: play, resource: resource, output: output}
