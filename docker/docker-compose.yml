@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  kplayer:
+    build:
+      context: ./ctx
+      dockerfile: ../Dockerfile
+    image: kplayer-go:latest
+    container_name: kplayer
+    restart: unless-stopped
+    ports:
+      - "4155:4155"
+      - "4156:4156"
+    volumes:
+      # 媒体文件（与 config.json 中的资源路径对应）
+      - ./video:/video
+      # 数据目录挂到容器工作目录：目录内需放 config.json；
+      # management.json / engine.json 由系统自动生成并持久化于此
+      - ./data:/kplayer
+    # 推流到本机 SRS/nginx-rtmp 时改用 host 网络：
+    # network_mode: "host"

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>KPlayer 播控台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app" id="app">
+
+    <!-- 侧边导航 -->
+    <aside class="sidebar" id="sidebar" aria-label="主导航">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">KP</div>
+        <div class="brand-text">
+          <div class="brand-name">KPlayer 播控台</div>
+          <div class="brand-sub">无人值守直播推流引擎</div>
+        </div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <button class="nav-item is-active" data-view="overview" data-title="总览" type="button">总览</button>
+        <button class="nav-item" data-view="streams" data-title="多路推流" type="button">多路推流</button>
+        <button class="nav-item" data-view="playlist" data-title="节目单" type="button">节目单</button>
+        <button class="nav-item" data-view="tasks" data-title="定时任务" type="button">定时任务</button>
+        <button class="nav-item" data-view="effects" data-title="效果与插件" type="button">效果与插件</button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <button class="nav-item" id="collapseBtn" type="button">收起侧栏</button>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim" hidden></div>
+
+    <!-- 主区域 -->
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn" id="menuBtn" type="button" aria-label="切换菜单" aria-expanded="false">&#9776;</button>
+        <h1 class="page-title" id="pageTitle">总览</h1>
+        <div class="topbar-right">
+          <span class="badge badge-neutral" id="connBadge" title="后端连接状态">离线</span>
+          <button class="btn btn-ghost" id="refreshBtn" type="button">刷新</button>
+        </div>
+      </header>
+
+      <div class="toasts" id="toasts" aria-live="polite"></div>
+
+      <main class="view" id="view" aria-live="polite"></main>
+    </div>
+  </div>
+
+  <!-- 登录页：仅在启用鉴权时显示 -->
+  <div class="login-screen" id="login" hidden>
+    <form class="card login-card" id="loginForm" novalidate>
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">KP</div>
+        <div class="brand-text">
+          <div class="brand-name">KPlayer 播控台</div>
+          <div class="brand-sub">无人值守直播推流引擎</div>
+        </div>
+      </div>
+      <h1 class="login-title">登录</h1>
+      <p class="login-sub">登录以管理此 KPlayer 实例。</p>
+      <div class="field"><label for="loginUser">用户名</label>
+        <input id="loginUser" type="text" autocomplete="username" spellcheck="false"></div>
+      <div class="field"><label for="loginPass">密码</label>
+        <input id="loginPass" type="password" autocomplete="current-password"></div>
+      <div class="login-err" id="loginErr" hidden></div>
+      <button class="btn btn-primary" id="loginBtn" type="submit">登 录</button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,958 @@
+[
+  {
+    "o": ">Webhooks (' + webhooks.length + ')</h2>",
+    "n": ">Webhook（' + webhooks.length + '）</h2>"
+  },
+  {
+    "o": "type=\"button\">New webhook</button>",
+    "n": "type=\"button\">新建 Webhook</button>"
+  },
+  {
+    "o": "No webhooks configured yet.",
+    "n": "尚未配置任何 Webhook。"
+  },
+  {
+    "o": "<tr><th>Name</th><th>URL</th><th>Events</th><th>Status</th><th></th></tr>",
+    "n": "<tr><th>名称</th><th>URL</th><th>事件</th><th>状态</th><th></th></tr>"
+  },
+  {
+    "o": "text: 'Deliveries' })",
+    "n": "text: '投递记录' })"
+  },
+  {
+    "o": "w.enabled ? 'Disable' : 'Enable' })",
+    "n": "w.enabled ? '停用' : '启用' })"
+  },
+  {
+    "o": "toast('Webhook ' + (w.enabled ? 'disabled' : 'enabled'), 'ok')",
+    "n": "toast('Webhook ' + (w.enabled ? '已停用' : '已启用'), 'ok')"
+  },
+  {
+    "o": "if (!confirm('Delete webhook \"' + w.name + '\"?'))",
+    "n": "if (!confirm('确定删除 Webhook \"' + w.name + '\" 吗？'))"
+  },
+  {
+    "o": "toast('Webhook deleted', 'ok')",
+    "n": "toast('Webhook 已删除', 'ok')"
+  },
+  {
+    "o": "(editing ? 'Edit webhook' : 'New webhook') + '</h3>'",
+    "n": "(editing ? '编辑 Webhook' : '新建 Webhook') + '</h3>'"
+  },
+  {
+    "o": "label>Name</label><input id=\"whName\"",
+    "n": "label>名称</label><input id=\"whName\""
+  },
+  {
+    "o": "label>URL</label><input id=\"whUrl\"",
+    "n": "label>URL</label><input id=\"whUrl\""
+  },
+  {
+    "o": "Events (at least one)</label>",
+    "n": "事件（至少一个）</label>"
+  },
+  {
+    "o": "toast('Webhook name is required', 'err')",
+    "n": "toast('必须填写 Webhook 名称', 'err')"
+  },
+  {
+    "o": "toast('Webhook URL is required', 'err')",
+    "n": "toast('必须填写 Webhook URL', 'err')"
+  },
+  {
+    "o": "toast('Select at least one event', 'err')",
+    "n": "toast('请至少选择一个事件', 'err')"
+  },
+  {
+    "o": "toast(editing ? 'Webhook updated' : 'Webhook created', 'ok')",
+    "n": "toast(editing ? 'Webhook 已更新' : 'Webhook 已创建', 'ok')"
+  },
+  {
+    "o": "'<h3>Deliveries - ' + esc(w.name || w.id) + '</h3>'",
+    "n": "'<h3>投递记录 - ' + esc(w.name || w.id) + '</h3>'"
+  },
+  {
+    "o": "<tr><th>Event</th><th>Status</th><th>Attempts</th><th>Last error</th><th>Delivered</th></tr>",
+    "n": "<tr><th>事件</th><th>状态</th><th>尝试次数</th><th>最后错误</th><th>投递时间</th></tr>"
+  },
+  {
+    "o": "class=\"muted\">Loading ...</td>",
+    "n": "class=\"muted\">加载中 ...</td>"
+  },
+  {
+    "o": "id=\"wdRefresh\" class=\"btn\" type=\"button\">Refresh</button>",
+    "n": "id=\"wdRefresh\" class=\"btn\" type=\"button\">刷新</button>"
+  },
+  {
+    "o": "id=\"wdClose\" class=\"btn btn-primary\" type=\"button\">Close</button>",
+    "n": "id=\"wdClose\" class=\"btn btn-primary\" type=\"button\">关闭</button>"
+  },
+  {
+    "o": "No deliveries yet.",
+    "n": "暂无投递记录。"
+  },
+  {
+    "o": ">Audit log (' + entries.length + ')</h2>",
+    "n": ">审计日志（' + entries.length + '）</h2>"
+  },
+  {
+    "o": "type=\"button\">Prune</button>",
+    "n": "type=\"button\">清理</button>"
+  },
+  {
+    "o": "label>Operator</label><input id=\"auOp\"",
+    "n": "label>操作人</label><input id=\"auOp\""
+  },
+  {
+    "o": "placeholder=\"filter by operator\">",
+    "n": "placeholder=\"按操作人筛选\">"
+  },
+  {
+    "o": "label>Action</label><input id=\"auAction\"",
+    "n": "label>动作</label><input id=\"auAction\""
+  },
+  {
+    "o": "placeholder=\"filter by action\">",
+    "n": "placeholder=\"按动作筛选\">"
+  },
+  {
+    "o": "label>Result</label><select id=\"auResult\"",
+    "n": "label>结果</label><select id=\"auResult\""
+  },
+  {
+    "o": "option value=\"\">any</option>",
+    "n": "option value=\"\">任意</option>"
+  },
+  {
+    "o": "option value=\"success\">success</option>",
+    "n": "option value=\"success\">成功</option>"
+  },
+  {
+    "o": "option value=\"failure\">failure</option>",
+    "n": "option value=\"failure\">失败</option>"
+  },
+  {
+    "o": "type=\"button\">Filter</button>",
+    "n": "type=\"button\">筛选</button>"
+  },
+  {
+    "o": "type=\"button\">Clear</button>",
+    "n": "type=\"button\">清除</button>"
+  },
+  {
+    "o": "No audit entries.",
+    "n": "暂无审计记录。"
+  },
+  {
+    "o": "<tr><th>Time</th><th>Operator</th><th>Action</th><th>Target</th><th>Result</th><th>Detail</th></tr>",
+    "n": "<tr><th>时间</th><th>操作人</th><th>动作</th><th>目标</th><th>结果</th><th>详情</th></tr>"
+  },
+  {
+    "o": "<h3>Prune audit log</h3>",
+    "n": "<h3>清理审计日志</h3>"
+  },
+  {
+    "o": "label>Max entries to keep</label>",
+    "n": "label>保留的最大条数</label>"
+  },
+  {
+    "o": "Entries older than the newest N are removed permanently.",
+    "n": "早于最新 N 条的旧记录将被永久删除。"
+  },
+  {
+    "o": "toast('Enter a non-negative integer', 'err')",
+    "n": "toast('请输入非负整数', 'err')"
+  },
+  {
+    "o": "save.textContent = 'Pruning ...'",
+    "n": "save.textContent = '清理中 ...'"
+  },
+  {
+    "o": "toast('Pruned audit log: removed ' + removed + ' entr' + (removed === 1 ? 'y' : 'ies'), 'ok')",
+    "n": "toast('审计日志已清理：移除 ' + removed + ' 条记录', 'ok')"
+  },
+  {
+    "o": "save.textContent = 'Prune';",
+    "n": "save.textContent = '清理';"
+  },
+  {
+    "o": ">Alarms (' + active.length + ' active / ' + alarms.length + ' total)</h2>",
+    "n": ">告警（' + active.length + ' 条待处理 / 共 ' + alarms.length + ' 条）</h2>"
+  },
+  {
+    "o": "type=\"button\">Resolve all</button>",
+    "n": "type=\"button\">全部解决</button>"
+  },
+  {
+    "o": "No alarms. All clear.",
+    "n": "暂无告警，一切正常。"
+  },
+  {
+    "o": "text: 'Resolve' })",
+    "n": "text: '解决' })"
+  },
+  {
+    "o": "toast('Alarm resolved', 'ok')",
+    "n": "toast('告警已解决', 'ok')"
+  },
+  {
+    "o": "toast('Alarm deleted', 'ok')",
+    "n": "toast('告警已删除', 'ok')"
+  },
+  {
+    "o": "toast('All active alarms resolved', 'ok')",
+    "n": "toast('所有待处理告警已解决', 'ok')"
+  },
+  {
+    "o": "(isActive ? 'active' : 'resolved') + '</span>",
+    "n": "(isActive ? '待处理' : '已解决') + '</span>"
+  },
+  {
+    "o": ">Users (' + users.length + ')</h2>",
+    "n": ">用户（' + users.length + '）</h2>"
+  },
+  {
+    "o": "type=\"button\">New user</button>",
+    "n": "type=\"button\">新建用户</button>"
+  },
+  {
+    "o": "No users yet.",
+    "n": "暂无用户。"
+  },
+  {
+    "o": "<tr><th>Username</th><th>Role</th><th>Status</th><th>Created</th><th>Updated</th><th></th></tr>",
+    "n": "<tr><th>用户名</th><th>角色</th><th>状态</th><th>创建时间</th><th>更新时间</th><th></th></tr>"
+  },
+  {
+    "o": "u.enabled ? 'Disable' : 'Enable' })",
+    "n": "u.enabled ? '停用' : '启用' })"
+  },
+  {
+    "o": "text: 'Reset password' })",
+    "n": "text: '重置密码' })"
+  },
+  {
+    "o": "toast('User ' + (u.enabled ? 'disabled' : 'enabled'), 'ok')",
+    "n": "toast('用户' + (u.enabled ? '已停用' : '已启用'), 'ok')"
+  },
+  {
+    "o": "if (!confirm('Delete user \"' + u.username + '\"?'))",
+    "n": "if (!confirm('确定删除用户 \"' + u.username + '\" 吗？'))"
+  },
+  {
+    "o": "toast('User deleted', 'ok')",
+    "n": "toast('用户已删除', 'ok')"
+  },
+  {
+    "o": "(editing ? 'Edit user' : 'New user') + '</h3>'",
+    "n": "(editing ? '编辑用户' : '新建用户') + '</h3>'"
+  },
+  {
+    "o": "label>Username</label><input id=\"uName\"",
+    "n": "label>用户名</label><input id=\"uName\""
+  },
+  {
+    "o": "label>Role</label><select id=\"uRole\">",
+    "n": "label>角色</label><select id=\"uRole\">"
+  },
+  {
+    "o": "label>Password (min 8 characters)</label>",
+    "n": "label>密码（最少 8 个字符）</label>"
+  },
+  {
+    "o": "toast('Username is required', 'err')",
+    "n": "toast('必须填写用户名', 'err')"
+  },
+  {
+    "o": "toast('User updated', 'ok')",
+    "n": "toast('用户已更新', 'ok')"
+  },
+  {
+    "o": "toast('Password must be at least 8 characters', 'err')",
+    "n": "toast('密码必须至少 8 个字符', 'err')"
+  },
+  {
+    "o": "toast('User created', 'ok')",
+    "n": "toast('用户已创建', 'ok')"
+  },
+  {
+    "o": "'<h3>Reset password - ' + esc(u.username) + '</h3>'",
+    "n": "'<h3>重置密码 - ' + esc(u.username) + '</h3>'"
+  },
+  {
+    "o": "label>New password (min 8 characters)</label>",
+    "n": "label>新密码（最少 8 个字符）</label>"
+  },
+  {
+    "o": "type=\"button\">Set password</button>",
+    "n": "type=\"button\">设置密码</button>"
+  },
+  {
+    "o": "toast('Password updated', 'ok')",
+    "n": "toast('密码已更新', 'ok')"
+  },
+  {
+    "o": "n.enabled ? 'Disable' : 'Enable' })",
+    "n": "n.enabled ? '停用' : '启用' })"
+  },
+  {
+    "o": "text: 'Heartbeat' })",
+    "n": "text: '心跳' })"
+  },
+  {
+    "o": "toast('Heartbeat sent - node is ' + (r.status || 'online'), 'ok')",
+    "n": "toast('心跳已发送 - 节点状态：' + (r.status || '在线'), 'ok')"
+  },
+  {
+    "o": "toast('Node ' + (n.enabled ? 'disabled' : 'enabled'), 'ok')",
+    "n": "toast('节点' + (n.enabled ? '已停用' : '已启用'), 'ok')"
+  },
+  {
+    "o": "if (!confirm('Delete node \"' + (n.name || n.id) + '\"?'))",
+    "n": "if (!confirm('确定删除节点 \"' + (n.name || n.id) + '\" 吗？'))"
+  },
+  {
+    "o": "toast('Node deleted', 'ok')",
+    "n": "toast('节点已删除', 'ok')"
+  },
+  {
+    "o": "text: 'Instances (' + insts.length + ')'",
+    "n": "text: '实例（' + insts.length + '）'"
+  },
+  {
+    "o": "text: '+ Add instance' })",
+    "n": "text: '+ 添加实例' })"
+  },
+  {
+    "o": "<tr><th>Instance</th><th>Name</th><th>Status</th><th>Channel</th><th>Updated</th><th></th></tr>",
+    "n": "<tr><th>实例</th><th>名称</th><th>状态</th><th>频道</th><th>更新时间</th><th></th></tr>"
+  },
+  {
+    "o": "if (!confirm('Delete instance \"' + (inst.name || inst.id) + '\"?'))",
+    "n": "if (!confirm('确定删除实例 \"' + (inst.name || inst.id) + '\" 吗？'))"
+  },
+  {
+    "o": "toast('Instance deleted', 'ok')",
+    "n": "toast('实例已删除', 'ok')"
+  },
+  {
+    "o": "(editing ? 'Edit node' : 'New node') + '</h3>'",
+    "n": "(editing ? '编辑节点' : '新建节点') + '</h3>'"
+  },
+  {
+    "o": "label>Name</label><input id=\"ndName\"",
+    "n": "label>名称</label><input id=\"ndName\""
+  },
+  {
+    "o": "label>Address</label><input id=\"ndAddr\"",
+    "n": "label>地址</label><input id=\"ndAddr\""
+  },
+  {
+    "o": "label>Status</label><select id=\"ndStatus\"><option value=\"online\">online</option><option value=\"offline\">offline</option><option value=\"unknown\">unknown</option></select>",
+    "n": "label>状态</label><select id=\"ndStatus\"><option value=\"online\">在线</option><option value=\"offline\">离线</option><option value=\"unknown\">未知</option></select>"
+  },
+  {
+    "o": "toast('Node name is required', 'err')",
+    "n": "toast('必须填写节点名称', 'err')"
+  },
+  {
+    "o": "toast(editing ? 'Node updated' : 'Node created', 'ok')",
+    "n": "toast(editing ? '节点已更新' : '节点已创建', 'ok')"
+  },
+  {
+    "o": "(editing ? 'Edit instance' : 'New instance') + '</h3>'",
+    "n": "(editing ? '编辑实例' : '新建实例') + '</h3>'"
+  },
+  {
+    "o": "label>Node</label><select id=\"inNode\">",
+    "n": "label>节点</label><select id=\"inNode\">"
+  },
+  {
+    "o": "label>Name</label><input id=\"inName\"",
+    "n": "label>名称</label><input id=\"inName\""
+  },
+  {
+    "o": "label>Status</label><select id=\"inStatus\"><option value=\"running\">running</option><option value=\"stopped\">stopped</option><option value=\"unknown\">unknown</option></select>",
+    "n": "label>状态</label><select id=\"inStatus\"><option value=\"running\">运行中</option><option value=\"stopped\">已停止</option><option value=\"unknown\">未知</option></select>"
+  },
+  {
+    "o": "label>Channel id (optional)</label>",
+    "n": "label>频道 ID（可选）</label>"
+  },
+  {
+    "o": "text: '-- select node --' })",
+    "n": "text: '-- 请选择节点 --' })"
+  },
+  {
+    "o": "text: '(missing node: ' + chosen + ')'",
+    "n": "text: '（缺失节点：' + chosen + '）'"
+  },
+  {
+    "o": "toast('Select a node', 'err')",
+    "n": "toast('请选择节点', 'err')"
+  },
+  {
+    "o": "toast(editing ? 'Instance updated' : 'Instance created', 'ok')",
+    "n": "toast(editing ? '实例已更新' : '实例已创建', 'ok')"
+  },
+  {
+    "o": ">Remote commands (' + commands.length + ')</h2>",
+    "n": ">远程命令（' + commands.length + '）</h2>"
+  },
+  {
+    "o": "type=\"button\">New command</button>",
+    "n": "type=\"button\">新建命令</button>"
+  },
+  {
+    "o": "type=\"button\">Purge terminal</button>",
+    "n": "type=\"button\">清理终端</button>"
+  },
+  {
+    "o": "No remote commands yet.",
+    "n": "暂无远程命令。"
+  },
+  {
+    "o": "<tr><th>Created</th><th>Node</th><th>Instance</th><th>Action</th><th>Status</th><th>Error</th><th></th></tr>",
+    "n": "<tr><th>创建时间</th><th>节点</th><th>实例</th><th>动作</th><th>状态</th><th>错误</th><th></th></tr>"
+  },
+  {
+    "o": "text: 'Sent' })",
+    "n": "text: '已发送' })"
+  },
+  {
+    "o": "text: 'Success' })",
+    "n": "text: '成功' })"
+  },
+  {
+    "o": "text: 'Failed' })",
+    "n": "text: '失败' })"
+  },
+  {
+    "o": "toast('Command marked sent', 'ok')",
+    "n": "toast('命令已标记为已发送', 'ok')"
+  },
+  {
+    "o": "toast('Command marked success', 'ok')",
+    "n": "toast('命令已标记为成功', 'ok')"
+  },
+  {
+    "o": "<h3>New remote command</h3>",
+    "n": "<h3>新建远程命令</h3>"
+  },
+  {
+    "o": "label>Node</label><select id=\"rcNode\">",
+    "n": "label>节点</label><select id=\"rcNode\">"
+  },
+  {
+    "o": "label>Instance (optional)</label>",
+    "n": "label>实例（可选）</label>"
+  },
+  {
+    "o": "label>Action</label><select id=\"rcAction\">",
+    "n": "label>动作</label><select id=\"rcAction\">"
+  },
+  {
+    "o": "type=\"button\">Send</button>",
+    "n": "type=\"button\">发送</button>"
+  },
+  {
+    "o": "text: '-- none --' })",
+    "n": "text: '-- 无 --' })"
+  },
+  {
+    "o": "save.textContent = 'Sending ...'",
+    "n": "save.textContent = '发送中 ...'"
+  },
+  {
+    "o": "toast('Remote command created', 'ok')",
+    "n": "toast('远程命令已创建', 'ok')"
+  },
+  {
+    "o": "save.textContent = 'Send';",
+    "n": "save.textContent = '发送';"
+  },
+  {
+    "o": "<h3>Mark command failed</h3>",
+    "n": "<h3>标记命令为失败</h3>"
+  },
+  {
+    "o": "label>Error note (optional)</label>",
+    "n": "label>错误说明（可选）</label>"
+  },
+  {
+    "o": "type=\"button\">Mark failed</button>",
+    "n": "type=\"button\">标记失败</button>"
+  },
+  {
+    "o": "toast('Command marked failed', 'ok')",
+    "n": "toast('命令已标记为失败', 'ok')"
+  },
+  {
+    "o": "<h3>Purge terminal commands</h3>",
+    "n": "<h3>清理终端命令</h3>"
+  },
+  {
+    "o": "label>Max commands to keep</label>",
+    "n": "label>保留的最大命令条数</label>"
+  },
+  {
+    "o": "Commands older than the newest N are removed permanently.",
+    "n": "早于最新 N 条的旧命令将被永久删除。"
+  },
+  {
+    "o": "toast('Terminal commands purged', 'ok')",
+    "n": "toast('终端命令已清理', 'ok')"
+  },
+  {
+    "o": ">Config snapshots (' + snapshots.length + ')</h2>",
+    "n": ">配置快照（' + snapshots.length + '）</h2>"
+  },
+  {
+    "o": "type=\"button\">Create snapshot</button>",
+    "n": "type=\"button\">创建快照</button>"
+  },
+  {
+    "o": "No config snapshots yet.",
+    "n": "暂无配置快照。"
+  },
+  {
+    "o": "<tr><th>Created</th><th>Operator</th><th>Description</th><th>Data hash</th><th></th></tr>",
+    "n": "<tr><th>创建时间</th><th>操作人</th><th>描述</th><th>数据哈希</th><th></th></tr>"
+  },
+  {
+    "o": "text: 'Restore' })",
+    "n": "text: '恢复' })"
+  },
+  {
+    "o": "if (!confirm('Restore configuration from snapshot taken ' + fmtTime(s.createdAt) + '?'))",
+    "n": "if (!confirm('确定从 ' + fmtTime(s.createdAt) + ' 的快照恢复配置吗？'))"
+  },
+  {
+    "o": "toast('Snapshot restored', 'ok')",
+    "n": "toast('快照已恢复', 'ok')"
+  },
+  {
+    "o": "if (!confirm('Delete snapshot from ' + fmtTime(s.createdAt) + '?'))",
+    "n": "if (!confirm('确定删除 ' + fmtTime(s.createdAt) + ' 的快照吗？'))"
+  },
+  {
+    "o": "toast('Snapshot deleted', 'ok')",
+    "n": "toast('快照已删除', 'ok')"
+  },
+  {
+    "o": "<h3>Create config snapshot</h3>",
+    "n": "<h3>创建配置快照</h3>"
+  },
+  {
+    "o": "label>Operator (optional)</label>",
+    "n": "label>操作人（可选）</label>"
+  },
+  {
+    "o": "label>Description (optional)</label>",
+    "n": "label>描述（可选）</label>"
+  },
+  {
+    "o": "type=\"button\">Create</button>",
+    "n": "type=\"button\">创建</button>"
+  },
+  {
+    "o": "save.textContent = 'Creating ...'",
+    "n": "save.textContent = '创建中 ...'"
+  },
+  {
+    "o": "toast('Snapshot created', 'ok')",
+    "n": "toast('快照已创建', 'ok')"
+  },
+  {
+    "o": "save.textContent = 'Create';",
+    "n": "save.textContent = '创建';"
+  },
+  {
+    "o": ">Config templates (' + templates.length + ')</h2>",
+    "n": ">配置模板（' + templates.length + '）</h2>"
+  },
+  {
+    "o": "type=\"button\">New template</button>",
+    "n": "type=\"button\">新建模板</button>"
+  },
+  {
+    "o": "No config templates yet.",
+    "n": "暂无配置模板。"
+  },
+  {
+    "o": "<tr><th>Name</th><th>Type</th><th>Body</th><th>Status</th><th></th></tr>",
+    "n": "<tr><th>名称</th><th>类型</th><th>内容</th><th>状态</th><th></th></tr>"
+  },
+  {
+    "o": "tp.enabled ? 'Disable' : 'Enable' })",
+    "n": "tp.enabled ? '停用' : '启用' })"
+  },
+  {
+    "o": "text: 'Expand' })",
+    "n": "text: '展开' })"
+  },
+  {
+    "o": "if (!confirm('Delete config template \"' + tp.name + '\"?'))",
+    "n": "if (!confirm('确定删除配置模板 \"' + tp.name + '\" 吗？'))"
+  },
+  {
+    "o": "toast('Template ' + (tp.enabled ? 'disabled' : 'enabled'), 'ok')",
+    "n": "toast('模板' + (tp.enabled ? '已停用' : '已启用'), 'ok')"
+  },
+  {
+    "o": "toast('Template deleted', 'ok')",
+    "n": "toast('模板已删除', 'ok')"
+  },
+  {
+    "o": "(editing ? 'Edit config template' : 'New config template') + '</h3>'",
+    "n": "(editing ? '编辑配置模板' : '新建配置模板') + '</h3>'"
+  },
+  {
+    "o": "label>Name</label><input id=\"tplName\"",
+    "n": "label>名称</label><input id=\"tplName\""
+  },
+  {
+    "o": "label>Type</label><input id=\"tplType\"",
+    "n": "label>类型</label><input id=\"tplType\""
+  },
+  {
+    "o": "placeholder=\"e.g. playlist\">",
+    "n": "placeholder=\"例如 playlist\">"
+  },
+  {
+    "o": "label>Body (JSON)</label>",
+    "n": "label>内容（JSON）</label>"
+  },
+  {
+    "o": "toast('Template name is required', 'err')",
+    "n": "toast('必须填写模板名称', 'err')"
+  },
+  {
+    "o": "toast('Body must be valid JSON', 'err')",
+    "n": "toast('内容必须是合法的 JSON', 'err')"
+  },
+  {
+    "o": "toast(editing ? 'Template updated' : 'Template created', 'ok')",
+    "n": "toast(editing ? '模板已更新' : '模板已创建', 'ok')"
+  },
+  {
+    "o": "'<h3>Expand template - ' + esc(tp.name || tp.id) + '</h3>'",
+    "n": "'<h3>展开模板 - ' + esc(tp.name || tp.id) + '</h3>'"
+  },
+  {
+    "o": "label>Params (key / value)</label>",
+    "n": "label>参数（键 / 值）</label>"
+  },
+  {
+    "o": "id=\"teKeyAdd\" type=\"text\" placeholder=\"key\"",
+    "n": "id=\"teKeyAdd\" type=\"text\" placeholder=\"键\""
+  },
+  {
+    "o": "id=\"teValAdd\" type=\"text\" placeholder=\"value\"",
+    "n": "id=\"teValAdd\" type=\"text\" placeholder=\"值\""
+  },
+  {
+    "o": "<button id=\"teAddBtn\" class=\"btn\" type=\"button\">+ Add</button>",
+    "n": "<button id=\"teAddBtn\" class=\"btn\" type=\"button\">+ 添加</button>"
+  },
+  {
+    "o": "<tr><th>Key</th><th>Value</th><th></th></tr>",
+    "n": "<tr><th>键</th><th>值</th><th></th></tr>"
+  },
+  {
+    "o": "type=\"button\">Expand</button>",
+    "n": "type=\"button\">展开</button>"
+  },
+  {
+    "o": "id=\"teClose\" class=\"btn\" type=\"button\">Close</button>",
+    "n": "id=\"teClose\" class=\"btn\" type=\"button\">关闭</button>"
+  },
+  {
+    "o": "label>Expanded body</label>",
+    "n": "label>展开后的内容</label>"
+  },
+  {
+    "o": "Click Expand to preview the result.",
+    "n": "点击「展开」预览结果。"
+  },
+  {
+    "o": "toast('Param key is required', 'err')",
+    "n": "toast('必须填写参数键', 'err')"
+  },
+  {
+    "o": "toast('Key already in list', 'err')",
+    "n": "toast('该键已在列表中', 'err')"
+  },
+  {
+    "o": "btn.textContent = 'Expanding ...'",
+    "n": "btn.textContent = '展开中 ...'"
+  },
+  {
+    "o": "btn.textContent = 'Expand';",
+    "n": "btn.textContent = '展开';"
+  },
+  {
+    "o": "toast('Duplicate param keys are not allowed', 'err')",
+    "n": "toast('不允许出现重复的参数键', 'err')"
+  },
+  {
+    "o": ">Industry templates (' + templates.length + ')</h2>",
+    "n": ">行业模板（' + templates.length + '）</h2>"
+  },
+  {
+    "o": "id=\"newIt\" class=\"btn btn-primary\" type=\"button\">New template</button>",
+    "n": "id=\"newIt\" class=\"btn btn-primary\" type=\"button\">新建模板</button>"
+  },
+  {
+    "o": "No industry templates yet.",
+    "n": "暂无行业模板。"
+  },
+  {
+    "o": "<tr><th>Name</th><th>Playlist</th><th>Placeholders</th><th>Scenes</th><th>Task</th><th>Status</th><th></th></tr>",
+    "n": "<tr><th>名称</th><th>节目单</th><th>占位符</th><th>场景</th><th>定时任务</th><th>状态</th><th></th></tr>"
+  },
+  {
+    "o": "type=\"button\">Deploy</button>",
+    "n": "type=\"button\">部署</button>"
+  },
+  {
+    "o": "if (!confirm('Delete industry template \"' + tp.name + '\"?'))",
+    "n": "if (!confirm('确定删除行业模板 \"' + tp.name + '\" 吗？'))"
+  },
+  {
+    "o": "'<h3>Deploy - ' + esc(tp.name || tp.id) + '</h3>'",
+    "n": "'<h3>部署 - ' + esc(tp.name || tp.id) + '</h3>'"
+  },
+  {
+    "o": "id=\"idKeyAdd\" type=\"text\" placeholder=\"key\"",
+    "n": "id=\"idKeyAdd\" type=\"text\" placeholder=\"键\""
+  },
+  {
+    "o": "id=\"idValAdd\" type=\"text\" placeholder=\"value\"",
+    "n": "id=\"idValAdd\" type=\"text\" placeholder=\"值\""
+  },
+  {
+    "o": "<button id=\"idAddBtn\" class=\"btn\" type=\"button\">+ Add</button>",
+    "n": "<button id=\"idAddBtn\" class=\"btn\" type=\"button\">+ 添加</button>"
+  },
+  {
+    "o": "id=\"idDeploy\" class=\"btn btn-primary\" type=\"button\">Deploy</button>",
+    "n": "id=\"idDeploy\" class=\"btn btn-primary\" type=\"button\">部署</button>"
+  },
+  {
+    "o": "id=\"idClose\" class=\"btn\" type=\"button\">Close</button>",
+    "n": "id=\"idClose\" class=\"btn\" type=\"button\">关闭</button>"
+  },
+  {
+    "o": "'<div class=\"field mt\"><label>Result</label>'",
+    "n": "'<div class=\"field mt\"><label>结果</label>'"
+  },
+  {
+    "o": "Click Deploy to provision the template.",
+    "n": "点击「部署」以部署模板。"
+  },
+  {
+    "o": "kv.appendChild(el('dt', { text: 'Playlist id' }))",
+    "n": "kv.appendChild(el('dt', { text: '节目单 ID' }))"
+  },
+  {
+    "o": "kv.appendChild(el('dt', { text: 'Scene templates' }))",
+    "n": "kv.appendChild(el('dt', { text: '场景模板' }))"
+  },
+  {
+    "o": "kv.appendChild(el('dt', { text: 'Task id' }))",
+    "n": "kv.appendChild(el('dt', { text: '定时任务 ID' }))"
+  },
+  {
+    "o": "toast('Template deployed', 'ok')",
+    "n": "toast('模板已部署', 'ok')"
+  },
+  {
+    "o": "btn.textContent = 'Deploying ...'",
+    "n": "btn.textContent = '部署中 ...'"
+  },
+  {
+    "o": "btn.textContent = 'Deploy';",
+    "n": "btn.textContent = '部署';"
+  },
+  {
+    "o": "(editing ? 'Edit industry template' : 'New industry template') + '</h3>'",
+    "n": "(editing ? '编辑行业模板' : '新建行业模板') + '</h3>'"
+  },
+  {
+    "o": "label>Name</label><input id=\"itName\"",
+    "n": "label>名称</label><input id=\"itName\""
+  },
+  {
+    "o": "label>Playlist name</label>",
+    "n": "label>节目单名称</label>"
+  },
+  {
+    "o": "label>Description</label><input id=\"itDesc\"",
+    "n": "label>描述</label><input id=\"itDesc\""
+  },
+  {
+    "o": "label>Media placeholders (comma separated)</label>",
+    "n": "label>媒体占位符（逗号分隔）</label>"
+  },
+  {
+    "o": "placeholder=\"media id, ${key}, ...\">",
+    "n": "placeholder=\"媒体 id, ${key}, ...\">"
+  },
+  {
+    "o": "label>Scene kinds</label>",
+    "n": "label>场景类型</label>"
+  },
+  {
+    "o": "> Include scheduled task</label>",
+    "n": "> 包含定时任务</label>"
+  },
+  {
+    "o": "label>Task name</label>",
+    "n": "label>任务名称</label>"
+  },
+  {
+    "o": "label>Task type</label><select id=\"itTaskType\"><option value=\"interval\">interval</option><option value=\"cron\">cron</option></select>",
+    "n": "label>任务类型</label><select id=\"itTaskType\"><option value=\"interval\">间隔</option><option value=\"cron\">定时</option></select>"
+  },
+  {
+    "o": "label>Interval (seconds)</label>",
+    "n": "label>间隔（秒）</label>"
+  },
+  {
+    "o": "label>Cron (5 fields)</label>",
+    "n": "label>定时表达式（5 位）</label>"
+  },
+  {
+    "o": "> Task enabled</label>",
+    "n": "> 定时任务启用</label>"
+  },
+  {
+    "o": "toast('Playlist name is required', 'err')",
+    "n": "toast('必须填写节目单名称', 'err')"
+  },
+  {
+    "o": "toast('Task name is required', 'err')",
+    "n": "toast('必须填写任务名称', 'err')"
+  },
+  {
+    "o": "toast(editing ? 'Template updated' : 'Template created', 'ok')",
+    "n": "toast(editing ? '模板已更新' : '模板已创建', 'ok')"
+  },
+  {
+    "o": "'>Nodes (' + nodes.length + ')</h2>'",
+    "n": "'>节点（' + nodes.length + '）</h2>'"
+  },
+  {
+    "o": "id=\"newNode\" class=\"btn btn-primary\" type=\"button\">New node</button>",
+    "n": "id=\"newNode\" class=\"btn btn-primary\" type=\"button\">新建节点</button>"
+  },
+  {
+    "o": "emptyView('No nodes yet.'",
+    "n": "emptyView('暂无节点。'"
+  },
+  {
+    "o": "<span>last seen: ",
+    "n": "<span>上次在线："
+  },
+  {
+    "o": "id=\"whEnabled\" type=\"checkbox\"' + ((!editing) || (editing && w.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "id=\"whEnabled\" type=\"checkbox\"' + ((!editing) || (editing && w.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "id=\"uEnabled\" type=\"checkbox\"' + ((!editing) || (editing && u.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "id=\"uEnabled\" type=\"checkbox\"' + ((!editing) || (editing && u.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "id=\"ndEnabled\" type=\"checkbox\"' + ((!editing) || (editing && n.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "id=\"ndEnabled\" type=\"checkbox\"' + ((!editing) || (editing && n.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "id=\"tplEnabled\" type=\"checkbox\"' + ((!editing) || (editing && tp.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "id=\"tplEnabled\" type=\"checkbox\"' + ((!editing) || (editing && tp.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "id=\"itEnabled\" type=\"checkbox\"' + ((!editing) || (editing && tp.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "id=\"itEnabled\" type=\"checkbox\"' + ((!editing) || (editing && tp.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "id=\"whCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"whCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"auPCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"auPCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"uCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"uCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"upCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"upCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"ndCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"ndCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"inCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"inCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"rcCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"rcCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"rcfCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"rcfCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"rcPCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"rcPCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"snCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"snCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"tplCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"tplCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"itCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"itCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"whSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "id=\"whSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "id=\"uSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "id=\"uSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "id=\"ndSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "id=\"ndSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "id=\"inSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "id=\"inSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "id=\"tplSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "id=\"tplSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "id=\"itSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "id=\"itSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "id=\"rcPSave\" class=\"btn btn-danger\" type=\"button\">Purge</button>",
+    "n": "id=\"rcPSave\" class=\"btn btn-danger\" type=\"button\">清理</button>"
+  },
+  {
+    "o": "text: 'Deploy' })",
+    "n": "text: '部署' })"
+  }
+]

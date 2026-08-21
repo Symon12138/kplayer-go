@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package RPCProto;
+
+option go_package = "github.com/bytelang/kplayer/types/server";
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+message Output {
+  string path = 1 [(validate.rules).string.min_len = 1];
+  string unique = 2;
+}
+
+// add
+message OutputAddArgs {
+  string path = 1 [(validate.rules).string.min_len = 1];
+  string unique = 2;
+}
+message OutputAddReply {
+  Output output = 1;
+}
+
+// remove
+message OutputRemoveArgs {
+  string unique = 1 [(validate.rules).string.min_len = 1];
+}
+message OutputRemoveReply {
+  Output output = 1;
+}
+
+// list
+message OutputModule {
+  string path = 1 [(gogoproto.jsontag) = "path"];
+  string unique = 2 [(gogoproto.jsontag) = "unique"];
+  uint64 create_time = 3 [(gogoproto.jsontag) = "create_time"];
+  uint64 end_time = 4 [(gogoproto.jsontag) = "end_time"];
+  uint64 start_time = 5 [(gogoproto.jsontag) = "start_time"];
+  bool connected = 6 [(gogoproto.jsontag) = "connected"];
+}
+
+message OutputListArgs {
+}
+message OutputListReply {
+  repeated OutputModule outputs = 1;
+}

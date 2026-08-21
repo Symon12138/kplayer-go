@@ -1,0 +1,30 @@
+# ---- 原有忽略项 ----
+main
+.idea
+build
+*.flv
+test
+.DS_Store
+core/cache
+
+# ---- Go 构建与缓存 ----
+*.exe
+*.so
+kplayer
+.gocache/
+
+# ---- 运行时数据（部署后生成，不入库）----
+config.json
+management.json
+engine.json
+data/
+video/
+*.log
+
+# ---- 本地工具产物 ----
+.chrome-tmp/
+cdp-profile-*/
+.dsh-vision-toolkit/
+
+# ---- 本地开发记录（不入库）----
+现状.md

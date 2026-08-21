@@ -1,0 +1,474 @@
+[
+  {
+    "o": ">Smart rules ('",
+    "n": ">智能规则（'"
+  },
+  {
+    "o": ">New rule</button>",
+    "n": ">新建规则</button>"
+  },
+  {
+    "o": "'No smart rules yet.'",
+    "n": "'暂无智能规则。'"
+  },
+  {
+    "o": "'<thead><tr><th>Name</th><th>Time slots</th><th>Tags</th><th>Avoid repeat</th><th>Max duration</th><th>Max items</th><th>Status</th><th></th></tr></thead><tbody></tbody>'",
+    "n": "'<thead><tr><th>名称</th><th>时间段</th><th>标签</th><th>避免重复</th><th>最大时长</th><th>最大条数</th><th>状态</th><th></th></tr></thead><tbody></tbody>'"
+  },
+  {
+    "o": "r.enabled ? 'Disable' : 'Enable'",
+    "n": "r.enabled ? '禁用' : '启用'"
+  },
+  {
+    "o": "var btnGen = el('button', { class: 'btn btn-sm', type: 'button', text: 'Generate' });\n        var btnEdit = el('button', { class: 'btn btn-sm', type: 'button', text: 'Edit' });\n        var btnDel = el('button', { class: 'btn btn-danger btn-sm', type: 'button', text: 'Delete' });",
+    "n": "var btnGen = el('button', { class: 'btn btn-sm', type: 'button', text: '生成' });\n        var btnEdit = el('button', { class: 'btn btn-sm', type: 'button', text: '编辑' });\n        var btnDel = el('button', { class: 'btn btn-danger btn-sm', type: 'button', text: '删除' });"
+  },
+  {
+    "o": "(r.enabled ? 'disabled' : 'enabled'), 'ok')",
+    "n": "(r.enabled ? '已禁用' : '已启用'), 'ok')"
+  },
+  {
+    "o": "confirm('Delete smart rule \"'",
+    "n": "confirm('确定删除智能规则 \"'"
+  },
+  {
+    "o": "toast('Smart rule deleted'",
+    "n": "toast('智能规则已删除'"
+  },
+  {
+    "o": "r.avoidRepeat ? 'yes' : 'no'",
+    "n": "r.avoidRepeat ? '是' : '否'"
+  },
+  {
+    "o": "(r.enabled ? 'enabled' : 'disabled') + '</span>'",
+    "n": "(r.enabled ? '已启用' : '已禁用') + '</span>'"
+  },
+  {
+    "o": "'<h3>Generate - '",
+    "n": "'<h3>生成 - '"
+  },
+  {
+    "o": "Recent media ids (comma separated, optional)",
+    "n": "最近媒体 ID（逗号分隔，可选）"
+  },
+  {
+    "o": "id=\"sgLimit\" type=\"number\" min=\"1\" placeholder=\"e.g. 20\"",
+    "n": "id=\"sgLimit\" type=\"number\" min=\"1\" placeholder=\"例如 20\""
+  },
+  {
+    "o": "<label>Limit (optional)</label><input id=\"sgLimit\"",
+    "n": "<label>条数限制（可选）</label><input id=\"sgLimit\""
+  },
+  {
+    "o": "id=\"sgGo\" class=\"btn btn-primary\" type=\"button\">Generate</button>",
+    "n": "id=\"sgGo\" class=\"btn btn-primary\" type=\"button\">生成</button>"
+  },
+  {
+    "o": "'<div class=\"field mt\"><label>Result</label>' +\n      '<div id=\"sgResult\"",
+    "n": "'<div class=\"field mt\"><label>结果</label>' +\n      '<div id=\"sgResult\""
+  },
+  {
+    "o": "RESULT_BOX_STYLE + '\">Click Generate to build a selection.",
+    "n": "RESULT_BOX_STYLE + '\">点击“生成”来构建一个选择。"
+  },
+  {
+    "o": "Playlist name (to apply)",
+    "n": "节目单名称（用于应用）"
+  },
+  {
+    "o": "placeholder=\"generated playlist\"",
+    "n": "placeholder=\"生成的节目单\""
+  },
+  {
+    "o": "id=\"sgApply\" class=\"btn btn-primary\" type=\"button\">Apply</button>",
+    "n": "id=\"sgApply\" class=\"btn btn-primary\" type=\"button\">应用</button>"
+  },
+  {
+    "o": "id=\"sgClose\" class=\"btn\" type=\"button\">Close</button>",
+    "n": "id=\"sgClose\" class=\"btn\" type=\"button\">关闭</button>"
+  },
+  {
+    "o": "'Generating ...'",
+    "n": "'生成中 ...'"
+  },
+  {
+    "o": "'No media matched.'",
+    "n": "'没有匹配的媒体。'"
+  },
+  {
+    "o": "btn.textContent = 'Generate';",
+    "n": "btn.textContent = '生成';"
+  },
+  {
+    "o": "toast('Playlist name is required', 'err'); return; }\n      var body = { playlistName: name };",
+    "n": "toast('节目单名称必填', 'err'); return; }\n      var body = { playlistName: name };"
+  },
+  {
+    "o": "'Applying ...'",
+    "n": "'应用中 ...'"
+  },
+  {
+    "o": "btn.textContent = 'Apply';",
+    "n": "btn.textContent = '应用';"
+  },
+  {
+    "o": "toast('Playlist \"'",
+    "n": "toast('节目单 \"'"
+  },
+  {
+    "o": "(editing ? 'Edit smart rule' : 'New smart rule')",
+    "n": "(editing ? '编辑智能规则' : '新建智能规则')"
+  },
+  {
+    "o": "'<div class=\"field\"><label>Name</label><input id=\"srName\"",
+    "n": "'<div class=\"field\"><label>名称</label><input id=\"srName\""
+  },
+  {
+    "o": "Tags (comma separated)",
+    "n": "标签（逗号分隔）"
+  },
+  {
+    "o": "Max duration (seconds, 0 = no cap)",
+    "n": "最大时长（秒，0 表示不限）"
+  },
+  {
+    "o": "Repeat lookback (0 = default)",
+    "n": "重复回看（0 表示默认）"
+  },
+  {
+    "o": "Max items (0 = default)",
+    "n": "最大条数（0 表示默认）"
+  },
+  {
+    "o": "<label>Description</label><input id=\"srDesc\"",
+    "n": "<label>描述</label><input id=\"srDesc\""
+  },
+  {
+    "o": "Time slots (hours, 0-23, start &lt;= end)",
+    "n": "时间段（小时，0-23，开始 &lt;= 结束）"
+  },
+  {
+    "o": ">+ Add slot</button></div></div>'",
+    "n": ">+ 添加时间段</button></div></div>'"
+  },
+  {
+    "o": "Start</th><th>End</th><th></th>",
+    "n": "开始</th><th>结束</th><th></th>"
+  },
+  {
+    "o": "Avoid repeat</label>'",
+    "n": "避免重复</label>'"
+  },
+  {
+    "o": "id=\"srEnabled\" type=\"checkbox\"' + ((!editing) || (editing && r.enabled) ? ' checked' : '') + '> Enabled</label>'",
+    "n": "id=\"srEnabled\" type=\"checkbox\"' + ((!editing) || (editing && r.enabled) ? ' checked' : '') + '> 启用</label>'"
+  },
+  {
+    "o": "id=\"srCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"srCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"srSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "id=\"srSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "text: 'Remove' });\n        rm.addEventListener('click', function () { slots.splice(idx, 1); drawSlots(); });",
+    "n": "text: '移除' });\n        rm.addEventListener('click', function () { slots.splice(idx, 1); drawSlots(); });"
+  },
+  {
+    "o": "'Rule name is required'",
+    "n": "'规则名称必填'"
+  },
+  {
+    "o": "'Slots must be hours in 0-23 with start <= end'",
+    "n": "'时间段必须为 0-23 小时且开始 <= 结束'"
+  },
+  {
+    "o": "editing ? 'Smart rule updated' : 'Smart rule created'",
+    "n": "editing ? '智能规则已更新' : '智能规则已创建'"
+  },
+  {
+    "o": ">Analytics</h2>",
+    "n": ">数据分析</h2>"
+  },
+  {
+    "o": "{ label: 'Total plays'",
+    "n": "{ label: '总播放'"
+  },
+  {
+    "o": "{ label: 'Successes'",
+    "n": "{ label: '成功'"
+  },
+  {
+    "o": "{ label: 'Failures', value: summary.failures }",
+    "n": "{ label: '失败', value: summary.failures }"
+  },
+  {
+    "o": "{ label: 'Success rate'",
+    "n": "{ label: '成功率'"
+  },
+  {
+    "o": "Failure rate by media",
+    "n": "按媒体查看失败率"
+  },
+  {
+    "o": "<label>Media id</label><input id=\"anMedia\"",
+    "n": "<label>媒体 ID</label><input id=\"anMedia\""
+  },
+  {
+    "o": "id=\"anMedia\" type=\"text\" placeholder=\"media unique id\"",
+    "n": "id=\"anMedia\" type=\"text\" placeholder=\"媒体唯一 ID\""
+  },
+  {
+    "o": "id=\"anQuery\" class=\"btn btn-primary\" type=\"button\">Query</button>",
+    "n": "id=\"anQuery\" class=\"btn btn-primary\" type=\"button\">查询</button>"
+  },
+  {
+    "o": "Enter a media id and query.",
+    "n": "输入媒体 ID 并查询。"
+  },
+  {
+    "o": "'<div class=\"field mt\"><label>Result</label>' +\n      '<div id=\"anFrResult\"",
+    "n": "'<div class=\"field mt\"><label>结果</label>' +\n      '<div id=\"anFrResult\""
+  },
+  {
+    "o": "toast('Enter a media id'",
+    "n": "toast('请输入媒体 ID'"
+  },
+  {
+    "o": "el('dt', { text: 'Failure rate' })",
+    "n": "el('dt', { text: '失败率' })"
+  },
+  {
+    "o": "el('dt', { text: 'Plays' })",
+    "n": "el('dt', { text: '播放次数' })"
+  },
+  {
+    "o": "el('dt', { text: 'Failures' })",
+    "n": "el('dt', { text: '失败次数' })"
+  },
+  {
+    "o": ">Play trend</h2>",
+    "n": ">播放趋势</h2>"
+  },
+  {
+    "o": "<label>Days</label><input id=\"anDays\"",
+    "n": "<label>天数</label><input id=\"anDays\""
+  },
+  {
+    "o": "id=\"anTrend\" class=\"btn btn-primary\" type=\"button\">Load</button>",
+    "n": "id=\"anTrend\" class=\"btn btn-primary\" type=\"button\">加载</button>"
+  },
+  {
+    "o": "<th>Date</th><th>Plays</th>",
+    "n": "<th>日期</th><th>播放</th>"
+  },
+  {
+    "o": "'<td colspan=\"2\" class=\"muted\">Loading ...</td>'",
+    "n": "'<td colspan=\"2\" class=\"muted\">加载中 ...</td>'"
+  },
+  {
+    "o": "'<td colspan=\"2\" class=\"muted\">No data.</td>'",
+    "n": "'<td colspan=\"2\" class=\"muted\">暂无数据。</td>'"
+  },
+  {
+    "o": ">Suggestions ('",
+    "n": ">智能建议（'"
+  },
+  {
+    "o": ">Recommend media</button>",
+    "n": ">推荐媒体</button>"
+  },
+  {
+    "o": "'No suggestions yet.'",
+    "n": "'暂无智能建议。'"
+  },
+  {
+    "o": "'<thead><tr><th>Kind</th><th>Title</th><th>Payload</th><th>Status</th><th>Created</th><th></th></tr></thead><tbody></tbody>'",
+    "n": "'<thead><tr><th>类型</th><th>标题</th><th>负载</th><th>状态</th><th>创建时间</th><th></th></tr></thead><tbody></tbody>'"
+  },
+  {
+    "o": "text: 'Approve'",
+    "n": "text: '批准'"
+  },
+  {
+    "o": "text: 'Reject'",
+    "n": "text: '拒绝'"
+  },
+  {
+    "o": "'<h3>Approve suggestion</h3>'",
+    "n": "'<h3>批准建议</h3>'"
+  },
+  {
+    "o": "<label>Playlist name</label><input id=\"saPlaylist\"",
+    "n": "<label>节目单名称</label><input id=\"saPlaylist\""
+  },
+  {
+    "o": "placeholder=\"playlist to create\"",
+    "n": "placeholder=\"要创建的节目单\""
+  },
+  {
+    "o": "id=\"saCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"saCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"saSave\" class=\"btn btn-primary\" type=\"button\">Approve</button>",
+    "n": "id=\"saSave\" class=\"btn btn-primary\" type=\"button\">批准</button>"
+  },
+  {
+    "o": "toast('Suggestion approved'",
+    "n": "toast('建议已批准'"
+  },
+  {
+    "o": "toast('Playlist name is required', 'err'); return; }\n      post('/suggestion/' + encodeURIComponent(s.id) + '/approve'",
+    "n": "toast('节目单名称必填', 'err'); return; }\n      post('/suggestion/' + encodeURIComponent(s.id) + '/approve'"
+  },
+  {
+    "o": "'<h3>Reject suggestion</h3>'",
+    "n": "'<h3>拒绝建议</h3>'"
+  },
+  {
+    "o": "Reason (optional)",
+    "n": "原因（可选）"
+  },
+  {
+    "o": "id=\"srjCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "id=\"srjCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "id=\"srjSave\" class=\"btn btn-danger\" type=\"button\">Reject</button>",
+    "n": "id=\"srjSave\" class=\"btn btn-danger\" type=\"button\">拒绝</button>"
+  },
+  {
+    "o": "toast('Suggestion rejected'",
+    "n": "toast('建议已拒绝'"
+  },
+  {
+    "o": "'<h3>Recommend media</h3>'",
+    "n": "'<h3>推荐媒体</h3>'"
+  },
+  {
+    "o": "<label>Limit (optional)</label><input id=\"sugLimit\"",
+    "n": "<label>条数限制（可选）</label><input id=\"sugLimit\""
+  },
+  {
+    "o": "id=\"sugGo\" class=\"btn btn-primary\" type=\"button\">Recommend</button>",
+    "n": "id=\"sugGo\" class=\"btn btn-primary\" type=\"button\">推荐</button>"
+  },
+  {
+    "o": "'<div class=\"field mt\"><label>Result</label>' +\n      '<div id=\"sugResult\"",
+    "n": "'<div class=\"field mt\"><label>结果</label>' +\n      '<div id=\"sugResult\""
+  },
+  {
+    "o": "Click Recommend to fetch media suggestions.",
+    "n": "点击“推荐”获取媒体建议。"
+  },
+  {
+    "o": "id=\"sugCreate\" class=\"btn btn-primary\" type=\"button\">Create suggestion</button>",
+    "n": "id=\"sugCreate\" class=\"btn btn-primary\" type=\"button\">创建建议</button>"
+  },
+  {
+    "o": "id=\"sugClose\" class=\"btn\" type=\"button\">Close</button>",
+    "n": "id=\"sugClose\" class=\"btn\" type=\"button\">关闭</button>"
+  },
+  {
+    "o": "'Recommending ...'",
+    "n": "'推荐中 ...'"
+  },
+  {
+    "o": "'No recommendations.'",
+    "n": "'暂无推荐。'"
+  },
+  {
+    "o": "btn.textContent = 'Recommend';",
+    "n": "btn.textContent = '推荐';"
+  },
+  {
+    "o": "toast('Recommend media first'",
+    "n": "toast('请先推荐媒体'"
+  },
+  {
+    "o": "btn.textContent = 'Creating ...';",
+    "n": "btn.textContent = '创建中 ...';"
+  },
+  {
+    "o": "title: 'Recommended media ' + id,",
+    "n": "title: '推荐媒体 ' + id,"
+  },
+  {
+    "o": "toast('Created ' + ids.length + ' suggestion' + (ids.length === 1 ? '' : 's')",
+    "n": "toast('已创建 ' + ids.length + ' 条建议' + (ids.length === 1 ? '' : '')"
+  },
+  {
+    "o": "btn.textContent = 'Create suggestion';",
+    "n": "btn.textContent = '创建建议';"
+  },
+  {
+    "o": "document.title = 'Sign in - KPlayer Console';",
+    "n": "document.title = '登录 - KPlayer 控制台';"
+  },
+  {
+    "o": "? 'Session expired - please sign in again.' : 'Please sign in.'",
+    "n": "? '会话已过期，请重新登录。' : '请登录。'"
+  },
+  {
+    "o": "'Enter username and password.'",
+    "n": "'请输入用户名和密码。'"
+  },
+  {
+    "o": "btn.textContent = 'Signing in ...';",
+    "n": "btn.textContent = '登录中 ...';"
+  },
+  {
+    "o": "throw new Error('Login response did not include a token')",
+    "n": "throw new Error('登录响应未包含令牌')"
+  },
+  {
+    "o": "btn.textContent = 'Sign in';",
+    "n": "btn.textContent = '登录';"
+  },
+  {
+    "o": "'Invalid username or password.'",
+    "n": "'用户名或密码错误。'"
+  },
+  {
+    "o": "token ? 'Session expired - please sign in again.' : undefined);",
+    "n": "token ? '会话已过期，请重新登录。' : undefined);"
+  },
+  {
+    "o": "'Cannot verify session: ' + (err.message || String(err))",
+    "n": "'无法验证会话：' + (err.message || String(err))"
+  },
+  {
+    "o": "'<h2>Backend</h2>'",
+    "n": "'<h2>后端</h2>'"
+  },
+  {
+    "o": "<dt>API prefix</dt>",
+    "n": "<dt>API 前缀</dt>"
+  },
+  {
+    "o": "The console proxies requests under /console/api to the KPlayer REST backend. The session token is sent as the Authorization (Bearer) header on every request.",
+    "n": "控制台将 /console/api 下的请求代理到 KPlayer REST 后端。每次请求都会将会话令牌作为 Authorization（Bearer）标头发送。"
+  },
+  {
+    "o": "'<h2>Account</h2>'",
+    "n": "'<h2>账户</h2>'"
+  },
+  {
+    "o": "'<dt>Username</dt><dd>'",
+    "n": "'<dt>用户名</dt><dd>'"
+  },
+  {
+    "o": "'<dt>Role</dt><dd><span",
+    "n": "'<dt>角色</dt><dd><span"
+  },
+  {
+    "o": "id=\"logoutBtn\" class=\"btn\" type=\"button\">Sign out</button>",
+    "n": "id=\"logoutBtn\" class=\"btn\" type=\"button\">退出登录</button>"
+  },
+  {
+    "o": "title + ' - KPlayer Console'",
+    "n": "title + ' - KPlayer 控制台'"
+  }
+]

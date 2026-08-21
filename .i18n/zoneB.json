@@ -1,0 +1,710 @@
+[
+  {
+    "o": ">Scheduled tasks ('",
+    "n": ">定时任务 ('"
+  },
+  {
+    "o": "emptyView('No scheduled tasks yet.'",
+    "n": "emptyView('暂无定时任务。'"
+  },
+  {
+    "o": "muted\">target: '",
+    "n": "muted\">目标: '"
+  },
+  {
+    "o": "muted\">last run: '",
+    "n": "muted\">上次运行: '"
+  },
+  {
+    "o": "t.interval + 's' : '-')",
+    "n": "t.interval + ' 秒' : '-')"
+  },
+  {
+    "o": "'cron ' + (t.cron || '')",
+    "n": "'定时 ' + (t.cron || '')"
+  },
+  {
+    "o": " 'every ' + t.interval",
+    "n": " '每' + t.interval"
+  },
+  {
+    "o": "badge-info\">interrupt' + (t.interruptDuration",
+    "n": "badge-info\">插播' + (t.interruptDuration"
+  },
+  {
+    "o": "badge-info\">scene: ' + esc(",
+    "n": "badge-info\">场景: ' + esc("
+  },
+  {
+    "o": "t.enabled ? 'enabled' : 'disabled') + '</span>",
+    "n": "t.enabled ? '启用' : '禁用') + '</span>'"
+  },
+  {
+    "o": "g.enabled ? 'enabled' : 'disabled') + '</span>",
+    "n": "g.enabled ? '启用' : '禁用') + '</span>'"
+  },
+  {
+    "o": "h.enabled ? 'enabled' : 'disabled') + '</span>",
+    "n": "h.enabled ? '启用' : '禁用') + '</span>'"
+  },
+  {
+    "o": "s.enabled ? 'enabled' : 'disabled') + '</span>",
+    "n": "s.enabled ? '启用' : '禁用') + '</span>'"
+  },
+  {
+    "o": "f.enabled ? 'enabled' : 'disabled') + '</span>",
+    "n": "f.enabled ? '启用' : '禁用') + '</span>'"
+  },
+  {
+    "o": "btnToggle = el('button', { class: 'btn btn-sm', type: 'button', text: t.enabled ? 'Disable' : 'Enable' })",
+    "n": "btnToggle = el('button', { class: 'btn btn-sm', type: 'button', text: t.enabled ? '停用' : '启用' })"
+  },
+  {
+    "o": "toast('Task updated', 'ok')",
+    "n": "toast('任务已更新', 'ok')"
+  },
+  {
+    "o": "!confirm('Delete task \"'",
+    "n": "!confirm('删除任务 \"'"
+  },
+  {
+    "o": "toast('Task deleted'",
+    "n": "toast('任务已删除'"
+  },
+  {
+    "o": "'Edit task' : 'New task'",
+    "n": "'编辑任务' : '新建任务'"
+  },
+  {
+    "o": "><label>Type</label><select id=\"tType\"",
+    "n": "><label>类型</label><select id=\"tType\""
+  },
+  {
+    "o": "id=\"tIntervalField\"><label>Interval (seconds)</label>",
+    "n": "id=\"tIntervalField\"><label>间隔（秒）</label>"
+  },
+  {
+    "o": "id=\"tCronField\" style=\"display:none\"><label>Cron (5 fields)</label>",
+    "n": "id=\"tCronField\" style=\"display:none\"><label>定时（5 段）</label>"
+  },
+  {
+    "o": "><label>Target type</label>",
+    "n": "><label>目标类型</label>"
+  },
+  {
+    "o": "id=\"tTargetType\"><option value=\"\">-- none --</option>",
+    "n": "id=\"tTargetType\"><option value=\"\">-- 无 --</option>"
+  },
+  {
+    "o": "<option value=\"playlist\">Playlist</option><option value=\"media\">Single media</option>",
+    "n": "<option value=\"playlist\">节目单</option><option value=\"media\">单个媒体</option>"
+  },
+  {
+    "o": "><label>Scene template (optional)</label>",
+    "n": "><label>场景模板（可选）</label>"
+  },
+  {
+    "o": "<label>Priority</label><select id=\"tPriority\">",
+    "n": "<label>优先级</label><select id=\"tPriority\">"
+  },
+  {
+    "o": "<option value=\"normal\">normal</option><option value=\"important\">important</option><option value=\"critical\">critical</option>",
+    "n": "<option value=\"normal\">普通</option><option value=\"important\">重要</option><option value=\"critical\">严重</option>"
+  },
+  {
+    "o": "type=\"checkbox\"' + ((!editing) || (editing && t.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "type=\"checkbox\"' + ((!editing) || (editing && t.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "> Interrupt (play immediately)</label>",
+    "n": "> 插播（立即播放）</label>"
+  },
+  {
+    "o": "id=\"tInterruptDurField\" style=\"display:none\"><label>Interrupt duration (seconds; empty = one-shot)</label>",
+    "n": "id=\"tInterruptDurField\" style=\"display:none\"><label>插播时长（秒；留空为一次）</label>"
+  },
+  {
+    "o": "toast(editing ? 'Task updated' : 'Task created'",
+    "n": "toast(editing ? '任务已更新' : '任务已创建'"
+  },
+  {
+    "o": "t.enabled) ? ' checked' : '') + '> Enabled</label>'",
+    "n": "t.enabled) ? ' checked' : '') + '> 启用</label>'"
+  },
+  {
+    "o": ">Outputs ('",
+    "n": ">输出 ('"
+  },
+  {
+    "o": "emptyView('No outputs configured.'",
+    "n": "emptyView('尚未配置输出。'"
+  },
+  {
+    "o": "<th>Status</th><th>Path</th><th>Unique</th><th>Started</th><th>Ended</th>",
+    "n": "<th>状态</th><th>路径</th><th>标识</th><th>开始时间</th><th>结束时间</th>"
+  },
+  {
+    "o": "o.connected ? 'connected' : 'disconnected'",
+    "n": "o.connected ? '已连接' : '未连接'"
+  },
+  {
+    "o": "!confirm('Remove output \"'",
+    "n": "!confirm('移除输出 \"'"
+  },
+  {
+    "o": "toast('Output removed'",
+    "n": "toast('输出已移除'"
+  },
+  {
+    "o": "'<h3>Add output</h3>'",
+    "n": "'<h3>添加输出</h3>'"
+  },
+  {
+    "o": "><label>Unique</label><input id=\"oUnique\"",
+    "n": "><label>标识</label><input id=\"oUnique\""
+  },
+  {
+    "o": "toast('Output path is required'",
+    "n": "toast('输出路径不能为空'"
+  },
+  {
+    "o": "toast('Output added'",
+    "n": "toast('输出已添加'"
+  },
+  {
+    "o": "id=\"oSave\" class=\"btn btn-primary\" type=\"button\">Add</button>",
+    "n": "id=\"oSave\" class=\"btn btn-primary\" type=\"button\">添加</button>"
+  },
+  {
+    "o": ">Output groups ('",
+    "n": ">输出组 ('"
+  },
+  {
+    "o": ">New group</button>'",
+    "n": ">新建组</button>'"
+  },
+  {
+    "o": "emptyView('No output groups yet.'",
+    "n": "emptyView('暂无输出组。'"
+  },
+  {
+    "o": "<th>Name</th><th>Platform</th><th>Region</th><th>Business</th>",
+    "n": "<th>名称</th><th>平台</th><th>地域</th><th>业务</th>"
+  },
+  {
+    "o": "<th>Outputs</th><th>Status</th>",
+    "n": "<th>输出</th><th>状态</th>"
+  },
+  {
+    "o": "toast('Output group ' + (g.enabled ? 'disabled' : 'enabled')",
+    "n": "toast('输出组 ' + (g.enabled ? '已停用' : '已启用')"
+  },
+  {
+    "o": "!confirm('Delete output group \"'",
+    "n": "!confirm('删除输出组 \"'"
+  },
+  {
+    "o": "toast('Output group deleted'",
+    "n": "toast('输出组已删除'"
+  },
+  {
+    "o": "'Edit output group' : 'New output group'",
+    "n": "'编辑输出组' : '新建输出组'"
+  },
+  {
+    "o": "><label>Platform</label><input id=\"ogPlatform\"",
+    "n": "><label>平台</label><input id=\"ogPlatform\""
+  },
+  {
+    "o": "><label>Region</label><input id=\"ogRegion\"",
+    "n": "><label>地域</label><input id=\"ogRegion\""
+  },
+  {
+    "o": "><label>Business</label><input id=\"ogBusiness\"",
+    "n": "><label>业务</label><input id=\"ogBusiness\""
+  },
+  {
+    "o": "><label>Description</label><input id=\"ogDesc\"",
+    "n": "><label>描述</label><input id=\"ogDesc\""
+  },
+  {
+    "o": "id=\"ogEnabled\" type=\"checkbox\"' + ((!editing) || (editing && g.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "id=\"ogEnabled\" type=\"checkbox\"' + ((!editing) || (editing && g.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "><label>Output reference</label>",
+    "n": "><label>输出引用</label>"
+  },
+  {
+    "o": "placeholder=\"unique id or URL\"",
+    "n": "placeholder=\"唯一标识或 URL\""
+  },
+  {
+    "o": "id=\"ogOutBtn\" class=\"btn\" type=\"button\">+ Add</button>",
+    "n": "id=\"ogOutBtn\" class=\"btn\" type=\"button\">+ 添加</button>"
+  },
+  {
+    "o": "<th>Output reference</th>",
+    "n": "<th>输出引用</th>"
+  },
+  {
+    "o": "toast('Enter an output reference'",
+    "n": "toast('请输入输出引用'"
+  },
+  {
+    "o": "toast('Already in list'",
+    "n": "toast('已在列表中'"
+  },
+  {
+    "o": "toast('Group name is required'",
+    "n": "toast('组名称不能为空'"
+  },
+  {
+    "o": "toast(editing ? 'Output group updated' : 'Output group created'",
+    "n": "toast(editing ? '输出组已更新' : '输出组已创建'"
+  },
+  {
+    "o": ">Failovers ('",
+    "n": ">主备切换 ('"
+  },
+  {
+    "o": ">New failover</button>'",
+    "n": ">新建主备切换</button>'"
+  },
+  {
+    "o": "emptyView('No failovers configured yet.'",
+    "n": "emptyView('尚未配置主备切换。'"
+  },
+  {
+    "o": "<th>Name</th><th>Primary</th><th>Backup</th><th>Policy</th>",
+    "n": "<th>名称</th><th>主输出</th><th>备输出</th><th>策略</th>"
+  },
+  {
+    "o": "<th>Threshold</th><th>Status</th>",
+    "n": "<th>阈值</th><th>状态</th>"
+  },
+  {
+    "o": "toast('Failover ' + (f.enabled ? 'disabled' : 'enabled')",
+    "n": "toast('主备切换 ' + (f.enabled ? '已停用' : '已启用')"
+  },
+  {
+    "o": "!confirm('Delete failover \"'",
+    "n": "!confirm('删除主备切换 \"'"
+  },
+  {
+    "o": "toast('Failover deleted'",
+    "n": "toast('主备切换已删除'"
+  },
+  {
+    "o": "'Edit failover' : 'New failover'",
+    "n": "'编辑主备切换' : '新建主备切换'"
+  },
+  {
+    "o": "><label>Primary output unique</label>",
+    "n": "><label>主输出唯一标识</label>"
+  },
+  {
+    "o": "><label>Backup output unique</label>",
+    "n": "><label>备输出唯一标识</label>"
+  },
+  {
+    "o": "><label>Policy</label><select id=\"foPolicy\"",
+    "n": "><label>策略</label><select id=\"foPolicy\""
+  },
+  {
+    "o": "<option value=\"automatic\">automatic</option><option value=\"manual\">manual</option>",
+    "n": "<option value=\"automatic\">自动</option><option value=\"manual\">手动</option>"
+  },
+  {
+    "o": "><label>Threshold (seconds)</label>",
+    "n": "><label>阈值（秒）</label>"
+  },
+  {
+    "o": "toast('Primary output unique is required'",
+    "n": "toast('主输出唯一标识不能为空'"
+  },
+  {
+    "o": "toast('Backup output unique is required'",
+    "n": "toast('备输出唯一标识不能为空'"
+  },
+  {
+    "o": "toast('Threshold must be a positive number of seconds'",
+    "n": "toast('阈值必须为正数秒'"
+  },
+  {
+    "o": "toast(editing ? 'Failover updated' : 'Failover created'",
+    "n": "toast(editing ? '主备切换已更新' : '主备切换已创建'"
+  },
+  {
+    "o": ">Health policies ('",
+    "n": ">健康策略 ('"
+  },
+  {
+    "o": ">New policy</button>'",
+    "n": ">新建策略</button>'"
+  },
+  {
+    "o": "emptyView('No health policies yet.'",
+    "n": "emptyView('暂无健康策略。'"
+  },
+  {
+    "o": "<th>Name</th><th>Max retries</th><th>Retry window</th>",
+    "n": "<th>名称</th><th>最大重试</th><th>重试窗口</th>"
+  },
+  {
+    "o": "<th>Auto-skip</th><th>Status</th>",
+    "n": "<th>自动跳过</th><th>状态</th>"
+  },
+  {
+    "o": "toast('Health policy ' + (h.enabled ? 'disabled' : 'enabled')",
+    "n": "toast('健康策略 ' + (h.enabled ? '已停用' : '已启用')"
+  },
+  {
+    "o": "!confirm('Delete health policy \"'",
+    "n": "!confirm('删除健康策略 \"'"
+  },
+  {
+    "o": "toast('Health policy deleted'",
+    "n": "toast('健康策略已删除'"
+  },
+  {
+    "o": "h.autoSkipOnFailure ? 'yes' : 'no'",
+    "n": "h.autoSkipOnFailure ? '是' : '否'"
+  },
+  {
+    "o": "'Edit health policy' : 'New health policy'",
+    "n": "'编辑健康策略' : '新建健康策略'"
+  },
+  {
+    "o": "><label>Max retries</label><input id=\"hpRetries\"",
+    "n": "><label>最大重试次数</label><input id=\"hpRetries\""
+  },
+  {
+    "o": "><label>Retry window (seconds)</label>",
+    "n": "><label>重试窗口（秒）</label>"
+  },
+  {
+    "o": "id=\"hpAutoSkip\" type=\"checkbox\"' + (editing && h.autoSkipOnFailure ? ' checked' : '') + '> Auto-skip on failure</label>",
+    "n": "id=\"hpAutoSkip\" type=\"checkbox\"' + (editing && h.autoSkipOnFailure ? ' checked' : '') + '> 失败自动跳过</label>"
+  },
+  {
+    "o": "toast('Max retries and retry window must be non-negative numbers'",
+    "n": "toast('最大重试次数与重试窗口必须为非负数'"
+  },
+  {
+    "o": "toast(editing ? 'Health policy updated' : 'Health policy created'",
+    "n": "toast(editing ? '健康策略已更新' : '健康策略已创建'"
+  },
+  {
+    "o": ">Cache tasks ('",
+    "n": ">缓存任务 ('"
+  },
+  {
+    "o": "emptyView('No cache tasks yet.'",
+    "n": "emptyView('暂无缓存任务。'"
+  },
+  {
+    "o": "<th>Media</th><th>Status</th><th>Note</th>",
+    "n": "<th>媒体</th><th>状态</th><th>备注</th>"
+  },
+  {
+    "o": "<th>Updated</th><th>Completed</th>",
+    "n": "<th>更新时间</th><th>完成时间</th>"
+  },
+  {
+    "o": "type: 'button', text: 'Start' })",
+    "n": "type: 'button', text: '开始' })"
+  },
+  {
+    "o": "type: 'button', text: 'Mark done' })",
+    "n": "type: 'button', text: '标记完成' })"
+  },
+  {
+    "o": "type: 'button', text: 'Mark failed' })",
+    "n": "type: 'button', text: '标记失败' })"
+  },
+  {
+    "o": "toast('Cache task started'",
+    "n": "toast('缓存任务已启动'"
+  },
+  {
+    "o": "toast('Cache task marked done'",
+    "n": "toast('缓存任务已标记完成'"
+  },
+  {
+    "o": "!confirm('Delete cache task for \"'",
+    "n": "!confirm('删除缓存任务 \"'"
+  },
+  {
+    "o": "toast('Cache task deleted'",
+    "n": "toast('缓存任务已删除'"
+  },
+  {
+    "o": "'<h3>New cache task</h3>'",
+    "n": "'<h3>新建缓存任务</h3>'"
+  },
+  {
+    "o": "><label>Or media id (manual)</label>",
+    "n": "><label>或手动输入媒体 ID</label>"
+  },
+  {
+    "o": "id=\"ctSave\" class=\"btn btn-primary\" type=\"button\">Create</button>",
+    "n": "id=\"ctSave\" class=\"btn btn-primary\" type=\"button\">创建</button>"
+  },
+  {
+    "o": "media.length ? '-- select media --' : 'No media registered yet'",
+    "n": "media.length ? '-- 选择媒体 --' : '尚未注册媒体'"
+  },
+  {
+    "o": "toast('Media id is required'",
+    "n": "toast('媒体 ID 不能为空'"
+  },
+  {
+    "o": "toast('Cache task created'",
+    "n": "toast('缓存任务已创建'"
+  },
+  {
+    "o": "'<h3>Mark cache task failed</h3>'",
+    "n": "'<h3>标记缓存任务失败</h3>'"
+  },
+  {
+    "o": "toast('Cache task marked failed'",
+    "n": "toast('缓存任务已标记失败'"
+  },
+  {
+    "o": ">Scene templates ('",
+    "n": ">场景模板 ('"
+  },
+  {
+    "o": "emptyView('No scene templates yet.'",
+    "n": "emptyView('暂无场景模板。'"
+  },
+  {
+    "o": "<th>Name</th><th>Kind</th><th>Params</th>",
+    "n": "<th>名称</th><th>类型</th><th>参数</th>"
+  },
+  {
+    "o": "type: 'button', text: 'Duplicate' })",
+    "n": "type: 'button', text: '复制' })"
+  },
+  {
+    "o": "toast('Scene template ' + (s.enabled ? 'disabled' : 'enabled')",
+    "n": "toast('场景模板 ' + (s.enabled ? '已停用' : '已启用')"
+  },
+  {
+    "o": "toast('Scene template duplicated'",
+    "n": "toast('场景模板已复制'"
+  },
+  {
+    "o": "!confirm('Delete scene template \"'",
+    "n": "!confirm('删除场景模板 \"'"
+  },
+  {
+    "o": "toast('Scene template deleted'",
+    "n": "toast('场景模板已删除'"
+  },
+  {
+    "o": "'Edit scene template' : 'New scene template'",
+    "n": "'编辑场景模板' : '新建场景模板'"
+  },
+  {
+    "o": "><label>Kind</label><select id=\"stKind\"",
+    "n": "><label>类型</label><select id=\"stKind\""
+  },
+  {
+    "o": "id=\"stEnabled\" type=\"checkbox\"' + ((!editing) || (editing && s.enabled) ? ' checked' : '') + '> Enabled</label>",
+    "n": "id=\"stEnabled\" type=\"checkbox\"' + ((!editing) || (editing && s.enabled) ? ' checked' : '') + '> 启用</label>"
+  },
+  {
+    "o": "id=\"stKeyAdd\" type=\"text\" placeholder=\"key\"",
+    "n": "id=\"stKeyAdd\" type=\"text\" placeholder=\"键\""
+  },
+  {
+    "o": "id=\"stValAdd\" type=\"text\" placeholder=\"value\"",
+    "n": "id=\"stValAdd\" type=\"text\" placeholder=\"值\""
+  },
+  {
+    "o": "id=\"stAddBtn\" class=\"btn\" type=\"button\">+ Add</button>",
+    "n": "id=\"stAddBtn\" class=\"btn\" type=\"button\">+ 添加</button>"
+  },
+  {
+    "o": "toast(editing ? 'Scene template updated' : 'Scene template created'",
+    "n": "toast(editing ? '场景模板已更新' : '场景模板已创建'"
+  },
+  {
+    "o": ">Plugins ('",
+    "n": ">插件 ('"
+  },
+  {
+    "o": ">Add plugin</button>'",
+    "n": ">添加插件</button>'"
+  },
+  {
+    "o": "emptyView('No plugins loaded yet.'",
+    "n": "emptyView('尚未加载插件。'"
+  },
+  {
+    "o": "<th>Path</th><th>Unique</th><th>Params</th><th>Loaded</th>",
+    "n": "<th>路径</th><th>标识</th><th>参数</th><th>加载时间</th>"
+  },
+  {
+    "o": "type: 'button', text: 'Edit params' })",
+    "n": "type: 'button', text: '编辑参数' })"
+  },
+  {
+    "o": "!confirm('Remove plugin \"'",
+    "n": "!confirm('移除插件 \"'"
+  },
+  {
+    "o": "toast('Plugin removed'",
+    "n": "toast('插件已移除'"
+  },
+  {
+    "o": "el('span', { class: 'muted', text: 'read-only' })",
+    "n": "el('span', { class: 'muted', text: '只读' })"
+  },
+  {
+    "o": "parts.push('+' + (keys.length - 3) + ' more')",
+    "n": "parts.push('+更多数' + (keys.length - 3) + '')"
+  },
+  {
+    "o": "'<h3>Add plugin</h3>'",
+    "n": "'<h3>添加插件</h3>'"
+  },
+  {
+    "o": "placeholder=\"plugin file path or URL\"",
+    "n": "placeholder=\"插件文件路径或 URL\""
+  },
+  {
+    "o": "><label>Unique (optional)</label>",
+    "n": "><label>唯一标识（可选）</label>"
+  },
+  {
+    "o": "placeholder=\"nickname\"",
+    "n": "placeholder=\"别名\""
+  },
+  {
+    "o": "toast('Plugin path is required'",
+    "n": "toast('插件路径不能为空'"
+  },
+  {
+    "o": "toast('Plugin added'",
+    "n": "toast('插件已添加'"
+  },
+  {
+    "o": "'<h3>Plugin params - '",
+    "n": "'<h3>插件参数 - '"
+  },
+  {
+    "o": "toast('Plugin params updated'",
+    "n": "toast('插件参数已更新'"
+  },
+  {
+    "o": ">Scheduled tasks (' + tasks.length + ')</h2>' +\n      '<button id=\"newTask\" class=\"btn btn-primary\" type=\"button\">New task</button>'",
+    "n": ">定时任务 (' + tasks.length + ')</h2>' +\n      '<button id=\"newTask\" class=\"btn btn-primary\" type=\"button\">新建任务</button>'"
+  },
+  {
+    "o": ">Cache tasks (' + tasks.length + ')</h2>' +\n      '<button id=\"newCt\" class=\"btn btn-primary\" type=\"button\">New task</button>'",
+    "n": ">缓存任务 (' + tasks.length + ')</h2>' +\n      '<button id=\"newCt\" class=\"btn btn-primary\" type=\"button\">新建任务</button>'"
+  },
+  {
+    "o": "id=\"tType\"><option value=\"interval\">interval</option><option value=\"cron\">cron</option>",
+    "n": "id=\"tType\"><option value=\"interval\">间隔</option><option value=\"cron\">定时</option>"
+  },
+  {
+    "o": "m.querySelector('#tName').value.trim();\n      if (!name) { toast('Task name is required'",
+    "n": "m.querySelector('#tName').value.trim();\n      if (!name) { toast('任务名称不能为空'"
+  },
+  {
+    "o": "'<h3>Add output</h3>' +\n      '<div class=\"form-grid\">' +\n      '<div class=\"field\"><label>Path</label>",
+    "n": "'<h3>添加输出</h3>' +\n      '<div class=\"form-grid\">' +\n      '<div class=\"field\"><label>路径</label>"
+  },
+  {
+    "o": "id=\"ctMediaManual\" type=\"text\" placeholder=\"media unique id\"",
+    "n": "id=\"ctMediaManual\" type=\"text\" placeholder=\"媒体唯一标识\""
+  },
+  {
+    "o": "'<div class=\"field\"><label>Note (optional)</label><input id=\"ctNote\"",
+    "n": "'<div class=\"field\"><label>备注（可选）</label><input id=\"ctNote\""
+  },
+  {
+    "o": "'<div class=\"field\"><label>Note (optional)</label><input id=\"ctfNote\"",
+    "n": "'<div class=\"field\"><label>备注（可选）</label><input id=\"ctfNote\""
+  },
+  {
+    "o": "m.querySelector('#stKeyAdd').value.trim();\n      var v = m.querySelector('#stValAdd').value;\n      if (!k) { toast('Param key is required'",
+    "n": "m.querySelector('#stKeyAdd').value.trim();\n      var v = m.querySelector('#stValAdd').value;\n      if (!k) { toast('参数键不能为空'"
+  },
+  {
+    "o": "if (dup) { toast('Key already in list', 'err'); return; }\n      params.push({ k: k, v: v });\n      m.querySelector('#stKeyAdd').value = ''",
+    "n": "if (dup) { toast('键已在列表中', 'err'); return; }\n      params.push({ k: k, v: v });\n      m.querySelector('#stKeyAdd').value = ''"
+  },
+  {
+    "o": "if (dupKey) { toast('Duplicate param keys are not allowed', 'err'); return; }\n      var body = {\n        name: name,\n        kind: kindSel.value,",
+    "n": "if (dupKey) { toast('不允许重复的参数键', 'err'); return; }\n      var body = {\n        name: name,\n        kind: kindSel.value,"
+  },
+  {
+    "o": "id=\"plKeyAdd\" type=\"text\" placeholder=\"key\"",
+    "n": "id=\"plKeyAdd\" type=\"text\" placeholder=\"键\""
+  },
+  {
+    "o": "id=\"plValAdd\" type=\"text\" placeholder=\"value\"",
+    "n": "id=\"plValAdd\" type=\"text\" placeholder=\"值\""
+  },
+  {
+    "o": "m.querySelector('#plKeyAdd').value.trim();\n      var v = m.querySelector('#plValAdd').value;\n      if (!k) { toast('Param key is required'",
+    "n": "m.querySelector('#plKeyAdd').value.trim();\n      var v = m.querySelector('#plValAdd').value;\n      if (!k) { toast('参数键不能为空'"
+  },
+  {
+    "o": "if (dup) { toast('Key already in list', 'err'); return; }\n      params.push({ k: k, v: v });\n      m.querySelector('#plKeyAdd').value = ''",
+    "n": "if (dup) { toast('键已在列表中', 'err'); return; }\n      params.push({ k: k, v: v });\n      m.querySelector('#plKeyAdd').value = ''"
+  },
+  {
+    "o": "id=\"ppKeyAdd\" type=\"text\" placeholder=\"key\"",
+    "n": "id=\"ppKeyAdd\" type=\"text\" placeholder=\"键\""
+  },
+  {
+    "o": "id=\"ppValAdd\" type=\"text\" placeholder=\"value\"",
+    "n": "id=\"ppValAdd\" type=\"text\" placeholder=\"值\""
+  },
+  {
+    "o": "m.querySelector('#ppKeyAdd').value.trim();\n      var v = m.querySelector('#ppValAdd').value;\n      if (!k) { toast('Param key is required'",
+    "n": "m.querySelector('#ppKeyAdd').value.trim();\n      var v = m.querySelector('#ppValAdd').value;\n      if (!k) { toast('参数键不能为空'"
+  },
+  {
+    "o": "if (dup) { toast('Key already in list', 'err'); return; }\n      params.push({ k: k, v: v });\n      m.querySelector('#ppKeyAdd').value = ''",
+    "n": "if (dup) { toast('键已在列表中', 'err'); return; }\n      params.push({ k: k, v: v });\n      m.querySelector('#ppKeyAdd').value = ''"
+  },
+  {
+    "o": "<label>Params (key / value)</label>' +\n      '<div class=\"cluster\"><input id=\"stKeyAdd\"",
+    "n": "<label>参数（键 / 值）</label>' +\n      '<div class=\"cluster\"><input id=\"stKeyAdd\""
+  },
+  {
+    "o": "<label>Params (key / value)</label>' +\n      '<div class=\"cluster\"><input id=\"plKeyAdd\"",
+    "n": "<label>参数（键 / 值）</label>' +\n      '<div class=\"cluster\"><input id=\"plKeyAdd\""
+  },
+  {
+    "o": "<label>Params (key / value)</label>' +\n      '<div class=\"cluster\"><input id=\"ppKeyAdd\"",
+    "n": "<label>参数（键 / 值）</label>' +\n      '<div class=\"cluster\"><input id=\"ppKeyAdd\""
+  },
+  {
+    "o": "\"><thead><tr><th>Key</th><th>Value</th><th></th></tr></thead><tbody id=\"stParamList\"",
+    "n": "\"><thead><tr><th>键</th><th>值</th><th></th></tr></thead><tbody id=\"stParamList\""
+  },
+  {
+    "o": "\"><thead><tr><th>Key</th><th>Value</th><th></th></tr></thead><tbody id=\"plParamList\"",
+    "n": "\"><thead><tr><th>键</th><th>值</th><th></th></tr></thead><tbody id=\"plParamList\""
+  },
+  {
+    "o": "\"><thead><tr><th>Key</th><th>Value</th><th></th></tr></thead><tbody id=\"ppParamList\"",
+    "n": "\"><thead><tr><th>键</th><th>值</th><th></th></tr></thead><tbody id=\"ppParamList\""
+  },
+  {
+    "o": "m.querySelector('#stName').value.trim();\n      if (!name) { toast('Template name is required'",
+    "n": "m.querySelector('#stName').value.trim();\n      if (!name) { toast('模板名称不能为空'"
+  },
+  {
+    "o": "'<h3>Mark cache task failed</h3>' +\n      '<div class=\"field\"><label>Note (optional)</label><input id=\"ctfNote\"",
+    "n": "'<h3>标记缓存任务失败</h3>' +\n      '<div class=\"field\"><label>备注（可选）</label><input id=\"ctfNote\""
+  }
+]

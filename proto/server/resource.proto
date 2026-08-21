@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package RPCProto;
+
+option go_package = "github.com/bytelang/kplayer/types/server";
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+enum ResourceMediaType{
+  none = 0;
+  video = 1;
+  audio = 2;
+}
+
+message MixResourceGroup {
+  string path = 1;
+  ResourceMediaType media_type = 2;
+  bool persistent_loop = 3;
+}
+
+// res
+message Resource {
+  string path = 1 [(validate.rules).string.min_len = 1];
+  string unique = 2 [(validate.rules).string.min_len = 1];
+  int64 seek = 3 [(validate.rules).int64.gt = 0];
+  int64 end = 4 [(gogoproto.moretags) = "validate:\"number\""];
+  uint64 create_time = 5 [(gogoproto.jsontag) = "create_time"];
+  uint64 start_time = 6 [(gogoproto.jsontag) = "start_time"];
+  uint64 end_time = 7 [(gogoproto.jsontag) = "end_time"];
+  bool mix_resource_type = 8 [(gogoproto.jsontag) = "mix_resource_type"];
+  repeated MixResourceGroup groups = 9 [(gogoproto.jsontag) = "groups"];
+}
+
+// add
+message ResourceAddArgs {
+  string path = 1 [(gogoproto.moretags) = "validate:\"required_if=mix_resource_type false\""];
+  string unique = 2 [(gogoproto.moretags) = "validate:\"required\""];
+  int64 seek = 3 [(gogoproto.moretags) = "validate:\"number\""];
+  int64 end = 4 [(gogoproto.moretags) = "validate:\"number\""];
+  bool mix_resource_type = 8 [(gogoproto.jsontag) = "mix_resource_type"];
+  repeated MixResourceGroup groups = 9 [(gogoproto.jsontag) = "groups"];
+}
+message ResourceAddReply {
+  Resource resource = 1;
+}
+
+// remove
+message ResourceRemoveArgs {
+  string unique = 1 [(gogoproto.moretags) = "validate:\"required\""];
+}
+message ResourceRemoveReply {
+  message Resource {
+    string path = 1 [(gogoproto.moretags) = "validate:\"required\""];
+    string unique = 2 [(gogoproto.moretags) = "validate:\"required\""];
+    uint64 create_time = 3;
+  }
+  Resource resource = 1;
+}
+
+// list
+message ResourceListArgs {}
+message ResourceListReply {
+  repeated Resource resources = 1;
+}
+
+// all list
+message ResourceListAllArgs {}
+message ResourceListAllReply {
+  repeated Resource resources = 1;
+}
+
+// get current resource
+message ResourceCurrentArgs {}
+message ResourceCurrentReply {
+  Resource resource = 1;
+  uint64 duration = 2 [(gogoproto.jsontag) = "duration"];
+  string duration_format = 3;
+  int64 seek = 4 [(gogoproto.jsontag) = "seek"];
+  string seek_format = 5 [(gogoproto.jsontag) = "seek_format"];
+  bool hit_cache = 6 [(gogoproto.jsontag) = "hit_cache"];
+}
+
+// seek to timestamp
+message ResourceSeekArgs {
+  string unique = 1;
+  int64 seek = 2 [(gogoproto.moretags) = "validate:\"gte=0\""];
+}
+message ResourceSeekReply {
+  Resource resource = 1;
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "o": "<label for=\"pbTarget\">Target</label>",
+    "n": "<label for=\"pbTarget\">目标</label>"
+  },
+  {
+    "o": "<label for=\"pbIntTarget\">Target</label>",
+    "n": "<label for=\"pbIntTarget\">目标</label>"
+  },
+  {
+    "o": "<label>Path</label><input id=\"mPath\"",
+    "n": "<label>路径</label><input id=\"mPath\""
+  },
+  {
+    "o": "<label>Name (optional)</label>",
+    "n": "<label>名称（可选）</label>"
+  },
+  {
+    "o": "<label>Name</label>",
+    "n": "<label>名称</label>"
+  },
+  {
+    "o": "<label>Description</label>",
+    "n": "<label>描述</label>"
+  },
+  {
+    "o": "<label>Fallback playlist</label>",
+    "n": "<label>回退节目单</label>"
+  },
+  {
+    "o": "<th>#</th><th>Name</th><th>Path</th><th></th>",
+    "n": "<th>#</th><th>名称</th><th>路径</th><th></th>"
+  },
+  {
+    "o": "<tbody id=\"plItems\"></tbody></table></div>' +\n      '<div class=\"form-actions\"><button id=\"plCancel\" class=\"btn\" type=\"button\">Cancel</button>",
+    "n": "<tbody id=\"plItems\"></tbody></table></div>' +\n      '<div class=\"form-actions\"><button id=\"plCancel\" class=\"btn\" type=\"button\">取消</button>"
+  },
+  {
+    "o": "<button id=\"plSave\" class=\"btn btn-primary\" type=\"button\">Save</button>",
+    "n": "<button id=\"plSave\" class=\"btn btn-primary\" type=\"button\">保存</button>"
+  },
+  {
+    "o": "toast('Select a playlist or media target', 'err'); return; }",
+    "n": "toast('请选择节目单或媒体目标', 'err'); return; }"
+  }
+]
