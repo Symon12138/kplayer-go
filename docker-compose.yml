@@ -1,5 +1,7 @@
 services:
   kplayer:
+    # 已发布镜像可直接拉取；无网络时删除 image 行改用本地构建
+    image: ghcr.io/symon12138/kplayer-go:latest
     build: .
     ports:
       - "4155:4155"
