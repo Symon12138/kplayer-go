@@ -7,6 +7,7 @@ package server
 // watermarks / subtitles / audio adjustments at once.
 
 import (
+	"github.com/bytelang/kplayer/engine"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -274,6 +275,30 @@ func bgrColor(c string) string {
 
 // ErrEffectInvalid reports an invalid effect definition.
 var ErrEffectInvalid = fmt.Errorf("effects: invalid")
+
+// mergeEffectFilters makes the global effect chain the BASE of every
+// output's filter graph: the rendered -vf/-af strings run first and each
+// output's own filters append after them. Nil/empty effects return the
+// outputs unchanged.
+func mergeEffectFilters(outputs []engine.OutputConfig, vf, af string) []engine.OutputConfig {
+	if len(outputs) == 0 || (vf == "" && af == "") {
+		return outputs
+	}
+	out := make([]engine.OutputConfig, len(outputs))
+	for i, o := range outputs {
+		out[i] = o
+		out[i].Filters = joinFilters(vf, out[i].Filters)
+		out[i].AudioFilters = joinFilters(af, out[i].AudioFilters)
+	}
+	return out
+}
+
+func joinFilters(base, extra string) string {
+	if extra == "" {
+		return base
+	}
+	return base + "," + extra
+}
 
 // handleEffects serves GET/POST /effects: the effect list and its
 // application to the engine output.

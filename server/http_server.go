@@ -136,9 +136,18 @@ func (h *httpServer) StartServer(stopChan chan bool, mm module.ModuleManager, au
 	// rejected until outputs are configured via POST /engine/ffmpeg); a
 	// corrupt file disables the engine and keeps the legacy stub path.
 	var eng engine.Engine
+	// The global effect chain (watermarks / subtitles / marquee / ...) is
+	// merged into every engine's output filter graph at construction time:
+	// rendered -vf/-af strings become the base, per-output filters append.
+	// One EffectManager instance is shared by the main engine, the handler
+	// and the stream manager so all three observe the same list.
+	effMgr := NewEffectManager(effectFile)
 	if cfg, err := engine.Load(); err != nil {
 		log.WithField("error", err).Error("load engine config failed; engine disabled")
 	} else {
+		if vf, af, err := effMgr.Render(); err == nil {
+			cfg.Outputs = mergeEffectFilters(cfg.Outputs, vf, af)
+		}
 		eng = engine.NewFFmpegEngine(cfg)
 	}
 
@@ -149,7 +158,7 @@ func (h *httpServer) StartServer(stopChan chan bool, mm module.ModuleManager, au
 	var managementAPI http.Handler
 	var scheduler *management.Scheduler
 	var failoverMonitor *management.FailoverMonitor
-	if mgmt, err := newManagementHandlerWithEngine(playModule, resourceModule, outputModule, h.authOn, h.authToken, eng); err != nil {
+	if mgmt, err := newManagementHandlerWithEngine(playModule, resourceModule, outputModule, h.authOn, h.authToken, eng, effMgr); err != nil {
 		log.WithField("error", err).Error("initialize management api failed; management routes disabled")
 	} else {
 		managementAPI = mgmt

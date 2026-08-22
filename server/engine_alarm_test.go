@@ -111,7 +111,7 @@ func newEngineExitHandler(t *testing.T, mode string) (*managementHandler, *engin
 		FFmpegPath: ffmpeg,
 		Outputs:    []engine.OutputConfig{{URL: "rtmp://127.0.0.1:1935/live/test"}},
 	})
-	h, err := newManagementHandlerWithEngine(&fakePlayProvider{}, &fakeResourceProvider{}, &fakeOutputProvider{}, false, "", fe)
+	h, err := newManagementHandlerWithEngine(&fakePlayProvider{}, &fakeResourceProvider{}, &fakeOutputProvider{}, false, "", fe, NewEffectManager(effectFile))
 	if err != nil {
 		t.Fatalf("newManagementHandlerWithEngine: %v", err)
 	}

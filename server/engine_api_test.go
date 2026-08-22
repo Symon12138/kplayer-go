@@ -446,7 +446,7 @@ func TestNewManagementHandlerWithEngineWiring(t *testing.T) {
 	}()
 
 	fake := &fakeEngine{}
-	h, err := newManagementHandlerWithEngine(&fakePlayProvider{}, &fakeResourceProvider{}, &fakeOutputProvider{}, false, "", fake)
+	h, err := newManagementHandlerWithEngine(&fakePlayProvider{}, &fakeResourceProvider{}, &fakeOutputProvider{}, false, "", fake, NewEffectManager(effectFile))
 	if err != nil {
 		t.Fatalf("newManagementHandlerWithEngine: %v", err)
 	}

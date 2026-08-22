@@ -91,7 +91,7 @@ type statusSnapshot struct {
 }
 
 func newManagementHandler(play playprovider.ProviderI, resource resourceprovider.ProviderI, output outputprovider.ProviderI, authOn bool, authToken string) (*managementHandler, error) {
-	return newManagementHandlerWithEngine(play, resource, output, authOn, authToken, nil)
+	return newManagementHandlerWithEngine(play, resource, output, authOn, authToken, nil, NewEffectManager(effectFile))
 }
 
 // newManagementHandlerWithEngine is newManagementHandler plus the ffmpeg
@@ -99,7 +99,7 @@ func newManagementHandler(play playprovider.ProviderI, resource resourceprovider
 // ffmpeg subprocesses instead of the stub core, and the /engine REST
 // endpoints expose the engine configuration and status. A nil engine keeps
 // the legacy stub playback path.
-func newManagementHandlerWithEngine(play playprovider.ProviderI, resource resourceprovider.ProviderI, output outputprovider.ProviderI, authOn bool, authToken string, eng engine.Engine) (*managementHandler, error) {
+func newManagementHandlerWithEngine(play playprovider.ProviderI, resource resourceprovider.ProviderI, output outputprovider.ProviderI, authOn bool, authToken string, eng engine.Engine, effects *EffectManager) (*managementHandler, error) {
 	store, err := management.OpenStore(managementDataFile)
 	if err != nil {
 		return nil, err
@@ -158,7 +158,16 @@ func newManagementHandlerWithEngine(play playprovider.ProviderI, resource resour
 		}
 		return out, nil
 	})
-	result.effects = NewEffectManager(effectFile)
+	result.effects = effects
+	if eng != nil && result.effects != nil {
+		result.streams.SetEffectSource(func() (string, string) {
+			vf, af, err := result.effects.Render()
+			if err != nil {
+				return "", ""
+			}
+			return vf, af
+		})
+	}
 	result.status = &providerStatus{play: play, resource: resource, output: output}
 	// The webhook dispatcher delivers domain events to the subscribed
 	// endpoints in the background. It is created before the scheduler and

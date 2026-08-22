@@ -75,6 +75,9 @@ type StreamManager struct {
 	// resolvePlaylist maps a playlist id to its media entries in the
 	// playlist's play order.
 	resolvePlaylist func(ctx context.Context, playlistID string) ([]*management.Media, error)
+	// effectSource provides the global effect chain as rendered -vf/-af
+	// strings; nil disables the injection.
+	effectSource func() (string, string)
 }
 
 // NewStreamManager loads the persisted tasks (if any) and returns the
@@ -132,6 +135,13 @@ func (m *StreamManager) persistLocked() error {
 		return err
 	}
 	return os.Rename(tmpName, m.file)
+}
+
+// SetEffectSource wires the global effect chain provider: every task
+// engine merges the rendered -vf/-af strings as the base of its outputs'
+// filter graphs at construction time ("next stream start" semantics).
+func (m *StreamManager) SetEffectSource(fn func() (string, string)) {
+	m.effectSource = fn
 }
 
 func newStreamID() string {
@@ -279,9 +289,14 @@ func (m *StreamManager) taskEngine(t *StreamTask) *engine.FFmpegEngine {
 		// deployment needs no manual ffmpeg path anywhere.
 		ffmpeg = engine.DetectFFmpeg()
 	}
+	outputs := t.Outputs
+	if m.effectSource != nil {
+		vf, af := m.effectSource()
+		outputs = mergeEffectFilters(outputs, vf, af)
+	}
 	e := engine.NewFFmpegEngine(engine.Config{
 		FFmpegPath:        ffmpeg,
-		Outputs:           t.Outputs,
+		Outputs:           outputs,
 		ReconnectInterval: t.ReconnectInterval,
 	})
 	m.engs[t.ID] = e
@@ -329,6 +344,12 @@ func (m *StreamManager) Start(ctx context.Context, id string) error {
 			return fmt.Errorf("stream %q: expand media: %w", id, err)
 		}
 		items = append(items, part...)
+	}
+	// 每次启动重建引擎：全局效果变更在下次推流即生效
+	if m.effectSource != nil {
+		m.mu.Lock()
+		delete(m.engs, id)
+		m.mu.Unlock()
 	}
 	eng := m.taskEngine(t)
 	// StartQueue 单元素与 Start 等价，但会携带媒体的外挂音频/字幕。
