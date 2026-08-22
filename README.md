@@ -28,6 +28,16 @@ FFmpeg（解码 → 滤镜合成 → 编码 → RTMP/文件多路输出）
 
 ## 快速开始
 
+**Docker（推荐，已实测验证）**：
+
+```bash
+cp config.json.example config.json && docker compose up -d --build
+# 打开 http://<服务器IP>:4156/console/
+```
+
+镜像内置 ffmpeg 与全部依赖；数据挂载 ./data、./video，重启不丢。
+## 快速开始
+
 ```bash
 # 1. 构建（Linux/WSL；Windows 见 native/README.md 的 stub 方案）
 make build

@@ -4,9 +4,10 @@ WORKDIR /src
 COPY . .
 RUN cd native && \
     gcc -shared -fPIC -o libkplayer.so libkplayer_stub.c -lpthread && \
-    for lib in libkpcodec libkputil libkpadapter libkpplugin; do \
-      echo "" | gcc -shared -fPIC -x c - -o $$lib.so; \
-    done
+    echo "void _placeholder(void){}" > _ph.c && \
+    gcc -shared -fPIC -o libkpcodec.so _ph.c && \
+    cp libkpcodec.so libkputil.so && cp libkpcodec.so libkpadapter.so && cp libkpcodec.so libkpplugin.so && \
+    ls -l /src/native/*.so
 RUN CGO_ENABLED=1 \
     CGO_CFLAGS="-I/src/native" \
     CGO_LDFLAGS="-L/src/native -Wl,-rpath,/kplayer" \
