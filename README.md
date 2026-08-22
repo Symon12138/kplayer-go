@@ -1,5 +1,6 @@
 <h1 align="center">KPlayer 播控台</h1>
 <p align="center">无人值守视频直播推流引擎 + Web 管理控制台</p>
+<p align="center"><a href="CHANGELOG.md"><img src="https://img.shields.io/badge/版本-v1.0.0-blue" alt="v1.0.0" /></a> <img src="https://img.shields.io/badge/license-apache_2.0-red" alt="license" /></p>
 
 面向服务器环境：无需图形界面，登记素材、编排节目单、按计划自动开播，向多个平台同时推流。
 
