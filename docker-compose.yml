@@ -1,10 +1,11 @@
-version: "3.8"
-
 services:
   kplayer:
-    image: bytelang/kplayer:latest
-    # Only available on Linux
-    # network_mode: "host"
+    build: .
+    ports:
+      - "4155:4155"
+      - "4156:4156"
     volumes:
-      - $PWD/video:/video
-      - $PWD/config.json:/kplayer/config.json
+      - ./data:/kplayer/data          # 业务数据（management.json 等）
+      - ./video:/kplayer/video        # 媒体文件
+      - ./config.json:/kplayer/config.json
+    restart: unless-stopped
